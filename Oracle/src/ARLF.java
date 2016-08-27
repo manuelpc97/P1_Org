@@ -18,8 +18,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ARLF {
 
-    String direccion = "";
+  String direccion = "";
     Stack borrados = new Stack();
+    String borrado = "";
 
     public ARLF() {
 
@@ -50,17 +51,46 @@ public class ARLF {
         }
     }
 
-    public void addCampo(String campo) {
-        try {
-            RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+    public void addCampo(String nuevo_registro,int tamaño,int cantidad) throws FileNotFoundException, IOException {
+               RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+        if ((borrados.size() != 0)) {
+            int primera = (int) borrados.peek();
+            int chess = 0;
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                if ((char) archivo.readByte() == '}') {
+                    chess = i;
+                    break;
+                }
+
+            }
+            int cont = 0;
+            for (int j = chess+1; j < archivo.length(); j = j + (tamaño * cantidad)) {
+                archivo.seek(j);
+                cont++;
+                if (cont == primera) {
+                    archivo.seek(j);
+                    archivo.writeBytes(nuevo_registro);
+                }
+            }
+
+        } else {
             archivo.seek(archivo.length());
-            archivo.writeBytes(campo);
-        } catch (Exception e) {
-            System.out.println("Error al agregar el campo.");
+            archivo.writeBytes(nuevo_registro);
         }
     }
 
     public void listar(DefaultTableModel modelo) {
+
+    }
+     public void eliminar(int num) {
+        try {
+            RandomAccessFile archivo = new RandomAccessFile(this.borrado, "rw");
+            archivo.writeBytes(num + "" + ",");
+
+        } catch (Exception e) {
+            System.out.println("Error al crear el archivo");
+        }
 
     }
 }
