@@ -13,12 +13,16 @@ import java.io.RandomAccessFile;
 public class ARLF {
     
     String direccion = "";
+
+    public ARLF() {
+    
+    }
     
     public ARLF(String direccion, int sizeRegistro, int sizeCampo) {
         this.direccion = direccion + ".txt";
         try {
             RandomAccessFile archivo = new RandomAccessFile(this.direccion, "rw");
-            archivo.writeBytes(direccion + "°" + sizeRegistro + "|" + sizeCampo+"|");
+            archivo.writeBytes(direccion + "~" + sizeRegistro + "|" + sizeCampo+"|^");
         } catch (Exception e) {
             System.out.println("Error al crear el archivo");
         }
@@ -28,7 +32,7 @@ public class ARLF {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion,"rw");
             archivo.seek(archivo.length());
-            archivo.writeChars(header+"~");
+            archivo.writeChars(header+"}");
         } catch (Exception e) {
             System.out.println("Error al agregar header");
         }
