@@ -5,6 +5,7 @@ import java.io.RandomAccessFile;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +25,11 @@ public class ARLF {
 
     }
 
+    public ARLF(String dir) {
+        direccion = dir;
+    }
+
+    
     public ARLF(String direccion, int sizeRegistro, int sizeCampo) {
         this.direccion = direccion + ".txt";
         try {
@@ -38,8 +44,7 @@ public class ARLF {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
             archivo.seek(archivo.length());
-            archivo.writeBytes(header+"}");
-
+            archivo.writeBytes(header + "}");
         } catch (Exception e) {
             System.out.println("Error al agregar header");
         }
@@ -55,89 +60,7 @@ public class ARLF {
         }
     }
 
-    /* public void eliminar(int llave) {
-        try {
-            RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
-            char encontrado;
-            int salir = 0;
-            int salir2 = 0;
-            int contador = 0;
-            int contador2 = 0;
-            String numero1 = "";
-            String numero2 = "";
-            while (salir < 1) {
+    public void listar(DefaultTableModel modelo) {
 
-                archivo.seek(contador);
-                if (archivo.readChar() == '~') {
-                    salir++;
-                    contador++;
-                    while (salir2 < 2) {
-                        archivo.seek(contador);
-                        if (salir2 == 0) {
-                            
-                            if (archivo.readChar() == '|') {
-                                salir2++;
-                            }else{
-                                numero1 = numero1 + archivo.readChar();
-                            }
-
-                        } else {
-                            if (salir2 == 1) {
-                               
-                                if (archivo.readChar() == '|') {
-                                    salir2++;
-                                }else{
-                                     numero2 = numero2 + archivo.readChar();
-                                }
-
-                            }
-                        }
-                        contador++;
-                    }
-
-                }
-                contador++;
-            }
-            int numero_1 = Integer.parseInt(numero1);
-            int numero_2 = Integer.parseInt(numero2);
-            int registro = numero_1 * numero_2;
-            String llave_primaria = "";
-            int fin_header=0;
-            for (int i = 0; i < archivo.length(); i++) {
-                archivo.seek(i);
-                encontrado = archivo.readChar();
-                if (encontrado == '}') {
-                    fin_header=i;
-                    for (int j = i + 1; j < archivo.length(); j = j + registro) {
-                        archivo.seek(j);
-                        int contador_desde = j;
-                        for (int k = j; k <= k + numero_2; k++) {
-                            archivo.seek(k);
-                            llave_primaria = llave_primaria + archivo.readChar();
-                            contador_desde++;
-
-                        }
-                        if (llave_primaria == llave) {
-                            archivo.seek(j);
-                            archivo.writeChars("*");
-                            
-                        }
-                    }
-                }
-            }
-            ;
-        } catch (Exception e) {
-            System.out.println("Error al agregar el campo.");
-        }
-    }
-     */
-    public void agregar(String nuevo_registro) throws FileNotFoundException, IOException {
-        RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
-        archivo.seek(archivo.length());
-        archivo.writeChars(nuevo_registro);
-    }
-    
-    public void listar(DefaultTablemodel modelo){
-        
     }
 }
