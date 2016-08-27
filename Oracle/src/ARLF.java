@@ -32,7 +32,7 @@ public class ARLF {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion,"rw");
             archivo.seek(archivo.length());
-            archivo.writeChars(header+"}");
+            archivo.writeBytes(header+"}");
         } catch (Exception e) {
             System.out.println("Error al agregar header");
         }
@@ -42,7 +42,7 @@ public class ARLF {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion,"rw");
             archivo.seek(archivo.length());
-            archivo.writeChars(campo);
+            archivo.writeBytes(campo);
         } catch (Exception e) {
             System.out.println("Error al agregar el campo.");
         }
