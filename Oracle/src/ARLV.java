@@ -31,7 +31,8 @@ public class ARLV {
     public void addHeader(String header){
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
-            
+            archivo.seek(archivo.length());
+            archivo.writeBytes(header+"}");
         } catch (Exception e) {
             System.out.println("Error al cargar header");
         }
