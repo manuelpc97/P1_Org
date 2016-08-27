@@ -22,6 +22,9 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    int conta_universal;
+    String universo_universal = "";
+
     public Principal() {
         initComponents();
     }
@@ -59,10 +62,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jDialog1 = new javax.swing.JDialog();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        campos = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -150,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
         jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jDialog1.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
-        jDialog1.getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 180, 30));
+        jDialog1.getContentPane().add(campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 180, 30));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -158,11 +163,35 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jDialog1.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
-        jDialog1.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 120, -1));
+        jDialog1.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jDialog1.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 120, -1));
 
         jButton2.setText("nuevo");
-        jDialog1.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jDialog1.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jDialog1.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
+
+        jButton4.setText("jButton4");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jDialog1.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 100, 70));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -221,7 +250,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_nombrarHeaderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_nombrarHeaderMouseClicked
         if (contador < camposPorRegistro) {
-            header += this.tf_nombreHeader.getText() + "¿";
+            header += this.tf_nombreHeader.getText() + "&";
             contador++;
             this.tf_nombreHeader.setText("");
             JOptionPane.showMessageDialog(this, "Campo nombrado correctamente");
@@ -244,18 +273,22 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_guardarHeaderMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try { 
-             String[] campos= enviar_nombres();
-             System.out.println(campos[0]);
-             System.out.println(campos[1]);
-             System.out.println(campos[2]);
-             
+        this.campos.removeAllItems();
+        try {
+            String[] campos = enviar_nombres();
+            conta_universal = campos.length;
+
+            for (int i = 0; i < campos.length; i++) {
+
+                this.campos.addItem(campos[i]);
+
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -264,66 +297,159 @@ public class Principal extends javax.swing.JFrame {
         this.jDialog1.setLocationRelativeTo(this);
         this.jDialog1.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if (this.campos.getItemCount() > 0) {
+            int pos1 = this.campos.getSelectedIndex();
+            String[] camp = new String[conta_universal];
+            System.out.println("sssssssssssssssssss" + conta_universal);
+            String validacion = this.jTextField1.getText();
+            camp[0] = "";
+            if (validacion.length() > 0) {
+                if (validacion.length() > fijo) {
+                    JOptionPane.showMessageDialog(null, "La cantida de datos que está tratando de ingresar es incorrecta");
+
+                } else {
+                    camp[pos1] = this.jTextField1.getText();
+                    this.campos.removeItemAt(pos1);
+                }
+                if (camp[0].length() != 0) {
+                    validacion_llave = true;
+                } else {
+                    validacion_llave = false;
+                }
+                for (int i = 0; i < camp.length; i++) {
+                    String cada_uno = "";
+                    camp[i] = camp[i] + "";
+                    if (fijo < camp[i].length()) {
+
+                        for (int j = 0; j < (fijo - camp.length); j++) {
+                            camp[i] = camp[i] + "_";
+
+                        }
+                    }
+
+                }
+                for (int i = 0; i < camp.length; i++) {
+                    if(camp[i] != null){
+                    
+                    }else{
+                        universo_universal = universo_universal + camp[i];
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (validacion_llave == true) {
+            try {
+                JOptionPane.showMessageDialog(null, "Registro nuevo agregado");
+
+                archivoFijo.agregar(universo_universal);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe agregar el campo principal al menos");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     public String[] enviar_nombres() throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile("luis.txt", "rw");
         char encontrado;
         int salir = 0;
         int salir2 = 0;
-        int contador = 1;
+        int contador = 0;
         int contador2 = 0;
         String numero1 = "";
         String numero2 = "";
-        System.out.println(archivo.readLine());
-        archivo.seek(0);
-        System.out.println(archivo.readChar());
+        String numeros = "";
+        // System.out.println(archivo.readLine());
+        archivo.seek(contador);
+        //   System.out.println("hhhhhh"+archivo.readByte());
         while (salir < 1) {
 
             archivo.seek(contador);
-            
-            if (archivo.readChar() == '~') {
+            char ver = '~';
+            char ver2 = '|';
+            System.out.println(ver + "    jjjjjjjjj                  " + ver2);
+            //System.out.println("hhhhhh"+archivo.readByte());
+            //  int pedro=archivo.readByte();
+
+            if ((char) archivo.readByte() == ver) {
+                System.out.println(contador + "pepito");
+                // System.out.println("as  " + pedro +"        "  + "s"+ ver );
                 salir++;
-                contador++;
-                while (salir2 < 2) {
-                    archivo.seek(contador);
-                    if (salir2 == 0) {
+                System.out.println("lllllllllllllllll");
 
-                        if (archivo.readChar() == '|') {
-                            salir2++;
-                        } else {
-                            numero1 = numero1 + archivo.readChar();
-                        }
+                System.out.println("la posi es" + contador);
+                archivo.seek(contador);
 
-                    } else if (salir2 == 1) {
+                while (((char) archivo.readByte()) != '^') {
+                    numeros = numeros + (char) archivo.readByte();
 
-                        if (archivo.readChar() == '|') {
-                            salir2++;
-                        } else {
-                            numero2 = numero2 + archivo.read();
-                        }
-
-                    }
                     contador++;
+                    archivo.seek(contador);
                 }
+                System.out.println(numeros + " peppeepepepe");
 
             }
             contador++;
         }
-        System.out.println(numero1);
-        System.out.println(numero2);
-        String[] campos= new String[Integer.parseInt(numero1)];
-        String campo="";
-        int numero=0;
+        int vab = 0;
+        for (int i = 0; i < numeros.length() - 1; i++) {
+            if (numeros.charAt(i) == '|') {
+                vab = 1;
+            } else if (vab == 0) {
+                numero1 = numero1 + numeros.charAt(i);
+            } else {
+                numero2 = numero2 + numeros.charAt(i);
+            }
+        }
+        System.out.println(contador + "dfajkhsdahsdlakhdljahjsdhajhdahahhasdfahdash");
+        System.out.println(numero1 + "  ho");
+        System.out.println(numero2 + "hos");
+        char pab = 42;
+        System.out.println("larisa     " + numero1);
+        System.out.println("larisa      " + numero2);
+        fijo = Integer.parseInt(numero2);
+        String[] campos = new String[Integer.parseInt(numero1)];
+        String campo = "";
+        int numero = 0;
         char letras;
-        for (int i = contador; i < archivo.length(); i++) {
-            archivo.seek(i);
-            
-            campo=campo + archivo.readChar();
-            if(archivo.read() =='¿'){
-                campos[numero]=campo;
+        String lista = "";
+        int ñ = 0;
+        int con = contador - 1;
+        while (ñ == 0) {
+            archivo.seek(con);
+            if (((char) archivo.readByte()) != '}') {
+                lista = lista + ((char) archivo.readByte());
+
+            } else {
+                ñ = 1;
+            }
+            con++;
+
+        }
+        System.out.println(lista);
+        for (int i = 0; i < lista.length(); i++) {
+
+            if (lista.charAt(i) == '&') {
+                campos[numero] = campo;
                 numero++;
-                campo="";
-            }else if(archivo.read()== '}'){
-                break;
+                campo = "";
+            } else {
+                campo = campo + lista.charAt(i);
             }
         }
         return campos;
@@ -379,10 +505,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_crearArchivos;
     private javax.swing.JButton bt_guardarHeader;
     private javax.swing.JButton bt_nombrarHeader;
+    private javax.swing.JComboBox campos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -398,6 +525,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JDialog jd_crearARLF;
     private javax.swing.JDialog jd_menuCreacion;
     private javax.swing.JDialog jd_nombrarCampos;
@@ -410,6 +538,9 @@ public class Principal extends javax.swing.JFrame {
     int camposPorRegistro = 0;
     int caracteresPorCampo = 0;
     int contador = 0;
-    ARLF archivoFijo = new ARLF();
+    ARLF archivoFijo = new ARLF("luis", 3, 2);
     String header = "";
+    String creación_universal = "";
+    int fijo = 0;
+    boolean validacion_llave = true;
 }
