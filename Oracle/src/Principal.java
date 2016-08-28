@@ -655,6 +655,9 @@ public class Principal extends javax.swing.JFrame {
         returnValue = fileChooser.showOpenDialog(this);
         String nombre = "";
 
+        returnValue = fileChooser.showOpenDialog(this);
+        
+
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             nombre = file.getName();
@@ -694,18 +697,18 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < cantCampos; i++) {
             campos[i] = JOptionPane.showInputDialog(this, "Ingrese un campo para su registro: ");
             if (tipoAdministracionCampos == 1) {
-                //Indicadores de longitud
+
+            } else if (tipoAdministracionCampos == 3) {
+                campos[i] = campos[i] + "<";
+
             } else if (tipoAdministracionCampos == 2) {
                 campos[i] +="!";
-            } else if (tipoAdministracionCampos == 3) {
-                //String[] camp=archivoVariable.
             }
 
         }
 
         if (tipoAdministracionCampos == 2) {
             for (int i = 0; i < campos.length; i++) {
-                System.out.println(i + ": " + campos[i]);
                 registroCompactado += campos[i];
             }
             registroCompactado+="]";
@@ -715,6 +718,27 @@ public class Principal extends javax.swing.JFrame {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (tipoAdministracionCampos == 3) {
+            try {
+                String[] key = archivoVariable.getHeader();
+                for (int i = 0; i < campos.length; i++) {
+                    registroCompactado = registroCompactado +key[i] + " : " + campos[i];
+
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            registroCompactado = registroCompactado + "]";
+            
+            try {
+                archivoVariable.addRegistro(registroCompactado);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        DefaultTableModel modelo = new DefaultTableModel();
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
 
     private void bt_adARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adARLVMouseClicked
