@@ -196,6 +196,7 @@ public class ARLV {
         cantCampos = this.getCantidadDeCampos();
         String[] arr = new String[cantCampos];
         String[] arrGrande;
+        
         if (adminRegistros == 2 && adminCampos == 2) {
             for (int i = 0; i < archivo.length(); i++) {
                 archivo.seek(i);
@@ -215,6 +216,10 @@ public class ARLV {
                 modelo.addRow(arr);
             }
             
+        }else if(adminRegistros == 3 && adminCampos == 3){
+        
+        }else if(adminRegistros == 1 && adminCampos == 1){
+        
         }
         return modelo;
     }

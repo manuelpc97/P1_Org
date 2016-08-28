@@ -739,6 +739,17 @@ public class Principal extends javax.swing.JFrame {
         }
         
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)this.jt_addRegistroARLV.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);
+        }
+        
+        try {
+            modelo = archivoVariable.listar(modelo);
+        } catch (Exception e) {
+        }
+        this.jt_addRegistroARLV.setModel(modelo);
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
 
     private void bt_adARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adARLVMouseClicked
