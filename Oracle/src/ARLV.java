@@ -63,8 +63,14 @@ public class ARLV {
                 archivo.writeByte(registro.charAt(i));
             }
             
-        } else if (tipoAdministracionRegistro == 3) {
+        } else if (tipoAdministracionRegistro == 9) {
             //Tablas de Indice
+        }else if(tipoAdministracionRegistro == 3){
+             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+            archivo.seek(archivo.length());
+            for (int i = 0; i < registro.length(); i++) {
+                archivo.writeByte(registro.charAt(i));
+            }
         }
     }
     

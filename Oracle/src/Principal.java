@@ -629,7 +629,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_crearHeader2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearHeader2MouseClicked
 
-        header1+=this.tf_nombreHeader2.getText()+"?";
+        header1 += this.tf_nombreHeader2.getText() + "?";
         this.tf_nombreHeader2.setText("");
         this.contadorCampos++;
     }//GEN-LAST:event_bt_crearHeader2MouseClicked
@@ -651,19 +651,19 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_fileChooserARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooserARLVMouseClicked
 
-       JFileChooser fileChooser = new JFileChooser();
-       int returnValue = 0;
-       returnValue = fileChooser.showOpenDialog(this);
-       String nombre = "";
-       
-       if(returnValue == JFileChooser.APPROVE_OPTION){
-           File file = fileChooser.getSelectedFile();
-           nombre = file.getName();
-           archivoVariable = new ARLV(nombre);
-       }
-       
-       String[] header;
-       DefaultTableModel modelo = new DefaultTableModel();
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = 0;
+        returnValue = fileChooser.showOpenDialog(this);
+        String nombre = "";
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            nombre = file.getName();
+            archivoVariable = new ARLV(nombre);
+        }
+
+        String[] header;
+        DefaultTableModel modelo = new DefaultTableModel();
         try {
             header = new String[archivoVariable.getCantidadDeCampos()];
             header = archivoVariable.getHeader();
@@ -697,10 +697,10 @@ public class Principal extends javax.swing.JFrame {
             //compactado, y ese registroCompactado es el que le vas a mandar al metodo addRegistro
             if (tipoAdministracionCampos == 1) {
                 //Indicadores de longitud
-            }else if(tipoAdministracionCampos == 2){
-                
-            }else if(tipoAdministracionCampos == 3){
-                //Key Value
+            } else if (tipoAdministracionCampos == 2) {
+
+            } else if (tipoAdministracionCampos == 3) {
+                campos[i] = campos[i] + "<";
             } else if (tipoAdministracionCampos == 2) {
                 campos[i] = campos[i] + "|";
             } else if (tipoAdministracionCampos == 3) {
@@ -713,14 +713,32 @@ public class Principal extends javax.swing.JFrame {
             for (int i = 0; i < campos.length; i++) {
                 registroCompactado = registroCompactado + campos[i];
             }
-            registroCompactado=registroCompactado+"]";
+            registroCompactado = registroCompactado + "]";
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        if (tipoAdministracionCampos == 3) {
+            try {
+                String[] key = archivoVariable.getHeader();
+                for (int i = 0; i < campos.length; i++) {
+                    registroCompactado = registroCompactado +key[i] + " : " + campos[i];
+
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            registroCompactado = registroCompactado + "]";
+            
+            try {
+                archivoVariable.addRegistro(registroCompactado);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
 
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
