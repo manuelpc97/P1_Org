@@ -18,24 +18,28 @@ public class ARLV {
 
     String direccion = "";
 
-    public ARLV(String nombre, int adminRegistro, int adminDato) {
+    public ARLV() {
+    
+    }
+    
+    public ARLV(String nombre, int adminRegistro, int adminCampo) {
         direccion = "./" + nombre + ".txt";
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
-            archivo.writeChars(nombre+"~"+adminRegistro+"|"+adminDato+"|^");
+            archivo.writeBytes("2" + nombre + "~" + adminRegistro + "|" + adminCampo + "|");
         } catch (Exception e) {
             System.out.println("Error al crear archivo");
         }
     }
 
-    public void addHeader(String header){
+    public void addHeader(String header, int cantidadCampos) {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
             archivo.seek(archivo.length());
-            archivo.writeBytes(header+"}");
+            archivo.writeBytes(cantidadCampos +"|^" +header + "}");
         } catch (Exception e) {
             System.out.println("Error al cargar header");
         }
-        
+
     }
 }

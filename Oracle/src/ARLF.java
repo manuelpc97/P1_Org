@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author manuel
  */
 public class ARLF {
+
     String direccion = "";
     Stack borrados = new Stack();
     String borrado = "";
@@ -36,7 +37,7 @@ public class ARLF {
         this.borrado = direccion + "borrado.txt";
         try {
             RandomAccessFile archivo = new RandomAccessFile(this.direccion, "rw");
-            archivo.writeBytes(direccion + "~" + sizeRegistro + "|" + sizeCampo + "|^");
+            archivo.writeBytes("1" + direccion + "~" + sizeRegistro + "|" + sizeCampo + "|^");
         } catch (Exception e) {
             System.out.println("Error al crear el archivo");
         }
