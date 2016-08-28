@@ -531,7 +531,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
         archivoFijo.eliminar(this.jt_addRegistroARLF.getSelectedRow() + 1);
-        
+
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) this.jt_addRegistroARLF.getModel();
         while (modelo.getRowCount() > 0) {
@@ -567,9 +567,9 @@ public class Principal extends javax.swing.JFrame {
                     registro[y] += "_";
                 }
                 seguir = false;
-            }else if(registro[y].length()>sizeCampo){
+            } else if (registro[y].length() > sizeCampo) {
                 JOptionPane.showMessageDialog(this, "El tamaño del campo es demasiado grande");
-            }else{
+            } else {
                 seguir = false;
             }
         }
@@ -577,7 +577,7 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < registro.length; i++) {
             nuevoRegistro += registro[i];
         }
-        
+
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) this.jt_addRegistroARLF.getModel();
 
@@ -601,24 +601,24 @@ public class Principal extends javax.swing.JFrame {
     private void BT_CREARALRVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_CREARALRVMouseClicked
         String name = "";
         name = this.tf_nombreARLV.getText();
-        
-        if(this.cb_adminCampos.getSelectedItem().toString().equals("Indicador Longitud")){
+
+        if (this.cb_adminCampos.getSelectedItem().toString().equals("Indicador Longitud")) {
             this.tipoAdministracionCampos = 1;
-        }else if(this.cb_adminCampos.getSelectedItem().toString().equals("Delimitadores")){
+        } else if (this.cb_adminCampos.getSelectedItem().toString().equals("Delimitadores")) {
             this.tipoAdministracionCampos = 2;
-        }else if(this.cb_adminCampos.getSelectedItem().toString().equals("Key Value")){
+        } else if (this.cb_adminCampos.getSelectedItem().toString().equals("Key Value")) {
             this.tipoAdministracionCampos = 3;
         }
-        
-        if(this.cb_adminRegistros.getSelectedItem().toString().equals("Indicador Longitud")){
+
+        if (this.cb_adminRegistros.getSelectedItem().toString().equals("Indicador Longitud")) {
             this.tipoAdministracionRegistros = 1;
-        }else if(this.cb_adminRegistros.getSelectedItem().toString().equals("Delimitadores")){
+        } else if (this.cb_adminRegistros.getSelectedItem().toString().equals("Delimitadores")) {
             this.tipoAdministracionRegistros = 2;
-        }else if(this.cb_adminRegistros.getSelectedItem().toString().equals("Tabla Indice")){
+        } else if (this.cb_adminRegistros.getSelectedItem().toString().equals("Tabla Indice")) {
             this.tipoAdministracionRegistros = 3;
         }
-        
-        archivoVariable = new ARLV(name,this.tipoAdministracionRegistros, this.tipoAdministracionCampos);
+
+        archivoVariable = new ARLV(name, this.tipoAdministracionRegistros, this.tipoAdministracionCampos);
         JOptionPane.showMessageDialog(this, "Archivo creado exitosamente");
         header1 = "";
         contadorCampos = 0;
@@ -628,7 +628,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BT_CREARALRVMouseClicked
 
     private void bt_crearHeader2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearHeader2MouseClicked
-        header1+=this.tf_nombreHeader2.getText()+"¿";
+        header1 += this.tf_nombreHeader2.getText() + "¿";
         this.tf_nombreHeader2.setText("");
         this.contadorCampos++;
     }//GEN-LAST:event_bt_crearHeader2MouseClicked
@@ -636,7 +636,7 @@ public class Principal extends javax.swing.JFrame {
     private void bt_saveHeaderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_saveHeaderMouseClicked
         try {
             archivoVariable.addHeader(header1, contadorCampos);
-            JOptionPane.showMessageDialog(this,"Campos nombrados exitosamente");
+            JOptionPane.showMessageDialog(this, "Campos nombrados exitosamente");
         } catch (Exception e) {
         }
         contadorCampos = 0;
@@ -649,7 +649,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_addRegistroARLVMouseClicked
 
     private void bt_fileChooserARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooserARLVMouseClicked
-       
+
     }//GEN-LAST:event_bt_fileChooserARLVMouseClicked
 
     private void BT_ADDREGISTROARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_ADDREGISTROARLVMouseClicked
@@ -657,27 +657,44 @@ public class Principal extends javax.swing.JFrame {
         int tipoAdministracionCampos = 0;
         String registroCompactado = "";
         String[] campos = new String[this.jt_addRegistroARLV.getColumnCount()];
-        
+
         try {
             tipoAdministracionCampos = archivoVariable.getTipoAdministracionCampos();
             cantCampos = archivoVariable.getCantidadDeCampos();
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         for (int i = 0; i < cantCampos; i++) {
             campos[i] = JOptionPane.showInputDialog(this, "Ingrese un campo para su registro: ");
+
             //Aqui vas a ir organizando tus CAMPOS segun el metodo que te toca, cada campo es campos[i]
             //Al final cuando temines tu metodo vas a meter ese arreglo de strings en un solo string que se llama registro
             //compactado, y ese registroCompactado es el que le vas a mandar al metodo addRegistro
-            if(tipoAdministracionCampos == 1){
+            if (tipoAdministracionCampos == 1) {
                 //Indicadores de longitud
-            }else if(tipoAdministracionCampos == 2){
-                //Delimitadores
-            }else if(tipoAdministracionCampos == 3){
-                //Key Value
+            } else if (tipoAdministracionCampos == 2) {
+                campos[i] = campos[i] + "|";
+            } else if (tipoAdministracionCampos == 3) {
+                //String[] camp=archivoVariable.
+            }
+
+        }
+        String registro = "";
+        if (tipoAdministracionCampos == 2) {
+            for (int i = 0; i < campos.length; i++) {
+                registro = registro + campos[i];
+            }
+            registro=registro+"]";
+            try {
+                archivoVariable.addRegistro(registro);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+
+
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
 
     private void bt_adARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adARLVMouseClicked
