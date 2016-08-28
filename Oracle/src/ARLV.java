@@ -53,7 +53,8 @@ public class ARLV {
     public void addRegistro(String registro) throws IOException{
         int tipoAdministracionRegistro = 0;
         tipoAdministracionRegistro = this.getTipoAdministracionRegistros();
-        
+        //En este metodo se supone que ya recibis todos los campos compactados y todo, entonces aqui te encargas de 
+        //organizar los REGISTROS segun el metodo que te toca, y de una vez lo escribis en el archivo.
         if(tipoAdministracionRegistro == 1){
             //Indicador de Longitud
         }else if(tipoAdministracionRegistro == 2){
