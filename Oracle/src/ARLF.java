@@ -133,9 +133,7 @@ public class ARLF {
         }
 
     }
-<<<<<<< HEAD
-    
-=======
+
 
     public boolean isBorrado(int num) {
         boolean retorno = false;
@@ -206,5 +204,5 @@ public class ARLF {
             }
         }
     }
->>>>>>> b6c83a78bbe94688fbf4c941d5b00ab3025dd340
+
 }

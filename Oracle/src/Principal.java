@@ -92,6 +92,12 @@ public class Principal extends javax.swing.JFrame {
         tf_nombreHeader2 = new javax.swing.JTextField();
         bt_crearHeader2 = new javax.swing.JButton();
         bt_saveHeader = new javax.swing.JButton();
+        mostrar = new javax.swing.JDialog();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_addRegistroARLF3 = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
+        bt_fileChooser1 = new javax.swing.JButton();
+        BT_ADDREGISTROARLF1 = new javax.swing.JButton();
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -119,8 +125,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_menuCreacion.getContentPane().add(bt_crearARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 260, 80));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
         jd_menuCreacion.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 370));
 
         jd_crearARLF.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -152,8 +156,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_crearARLF.getContentPane().add(bt_crearArchivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 140, 60));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
         jd_crearARLF.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 360));
 
         jd_nombrarCampos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -182,8 +184,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_nombrarCampos.getContentPane().add(bt_guardarHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 150, -1));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Cajas-en-3D.jpg")); // NOI18N
         jd_nombrarCampos.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 250));
 
         jd_menuAdministracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -203,8 +203,6 @@ public class Principal extends javax.swing.JFrame {
 
         bt_adARLV.setText("Administracion ARLV");
         jd_menuAdministracion.getContentPane().add(bt_adARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 160, 70));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
         jd_menuAdministracion.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 300));
 
         jd_addRegistro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,8 +244,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_addRegistro.getContentPane().add(bt_fileChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
-
-        jLabel16.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg")); // NOI18N
         jd_addRegistro.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 350));
 
         jmi_eliminar.setText("Eliminar Registro");
@@ -321,6 +317,46 @@ public class Principal extends javax.swing.JFrame {
         });
         jd_nombrarCampos2.getContentPane().add(bt_saveHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, -1));
 
+        mostrar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jt_addRegistroARLF3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jt_addRegistroARLF3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_addRegistroARLF3MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jt_addRegistroARLF3);
+
+        mostrar.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, 110));
+
+        jLabel23.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel23.setForeground(java.awt.Color.red);
+        jLabel23.setText("Administracion ARLF");
+        mostrar.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 250, -1));
+
+        bt_fileChooser1.setText("Seleccionar Archivo");
+        bt_fileChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_fileChooser1MouseClicked(evt);
+            }
+        });
+        mostrar.getContentPane().add(bt_fileChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+
+        BT_ADDREGISTROARLF1.setText("Agregar Registro");
+        BT_ADDREGISTROARLF1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BT_ADDREGISTROARLF1MouseClicked(evt);
+            }
+        });
+        mostrar.getContentPane().add(BT_ADDREGISTROARLF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -344,8 +380,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setForeground(java.awt.Color.red);
         jLabel2.setText("Oracle");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
 
         pack();
@@ -605,6 +639,18 @@ public class Principal extends javax.swing.JFrame {
         this.jd_nombrarCampos2.setVisible(false);
     }//GEN-LAST:event_bt_saveHeaderMouseClicked
 
+    private void jt_addRegistroARLF3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_addRegistroARLF3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_addRegistroARLF3MouseClicked
+
+    private void bt_fileChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooser1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_fileChooser1MouseClicked
+
+    private void BT_ADDREGISTROARLF1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_ADDREGISTROARLF1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BT_ADDREGISTROARLF1MouseClicked
+
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
         char encontrado;
@@ -727,7 +773,10 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_ADDREGISTROARLF;
+    private javax.swing.JButton BT_ADDREGISTROARLF1;
     private javax.swing.JButton BT_CREARALRV;
+    private javax.swing.JDialog Mostrar;
+    private javax.swing.JDialog Mostrar1;
     private javax.swing.JButton bt_adARLF;
     private javax.swing.JButton bt_adARLV;
     private javax.swing.JButton bt_adminArchivos;
@@ -737,6 +786,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_crearArchivos;
     private javax.swing.JButton bt_crearHeader2;
     private javax.swing.JButton bt_fileChooser;
+    private javax.swing.JButton bt_fileChooser1;
     private javax.swing.JButton bt_guardarHeader;
     private javax.swing.JButton bt_nombrarHeader;
     private javax.swing.JButton bt_saveHeader;
@@ -757,6 +807,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -765,6 +816,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JDialog jd_addRegistro;
     private javax.swing.JDialog jd_crearARLF;
     private javax.swing.JDialog jd_crearARLV;
@@ -777,6 +831,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSpinner js_campoR1;
     private javax.swing.JSpinner js_caracteresC1;
     private javax.swing.JTable jt_addRegistroARLF;
+    private javax.swing.JTable jt_addRegistroARLF1;
+    private javax.swing.JTable jt_addRegistroARLF2;
+    private javax.swing.JTable jt_addRegistroARLF3;
+    private javax.swing.JDialog mostrar;
     private javax.swing.JPopupMenu ppm_ARLF;
     private javax.swing.JTextField tf_nombreARLF1;
     private javax.swing.JTextField tf_nombreARLV;
