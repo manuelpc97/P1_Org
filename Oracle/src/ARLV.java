@@ -17,13 +17,13 @@ import java.io.RandomAccessFile;
  * @author manuel
  */
 public class ARLV {
-
+    
     String direccion = "";
-
+    
     public ARLV() {
-
+        
     }
-
+    
     public ARLV(String dir) {
         direccion = dir;
     }
@@ -37,7 +37,7 @@ public class ARLV {
             System.out.println("Error al crear archivo");
         }
     }
-
+    
     public void addHeader(String header, int cantidadCampos) {
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
@@ -46,9 +46,9 @@ public class ARLV {
         } catch (Exception e) {
             System.out.println("Error al cargar header");
         }
-
+        
     }
-
+    
     public void addRegistro(String registro) throws IOException {
         int tipoAdministracionRegistro = 0;
         tipoAdministracionRegistro = this.getTipoAdministracionRegistros();
@@ -57,20 +57,25 @@ public class ARLV {
         if (tipoAdministracionRegistro == 1) {
             //Indicador de Longitud
         } else if (tipoAdministracionRegistro == 2) {
-            //Delimitadores
+            RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+            archivo.seek(archivo.length());
+            for (int i = 0; i < registro.length(); i++) {
+                archivo.writeByte(registro.charAt(i));
+            }
+            
         } else if (tipoAdministracionRegistro == 3) {
             //Tablas de Indice
         }
     }
-
+    
     public int getTipoAdministracionRegistros() throws FileNotFoundException, IOException {
         int retorno = 0;
         int posicion = 0;
         int posicion2 = 0;
         String number = "";
-
+        
         RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
-
+        
         for (int i = 0; i < archivo.length(); i++) {
             archivo.seek(i);
             if (((char) archivo.readByte()) == '~') {
@@ -134,7 +139,7 @@ public class ARLV {
                 pos1 = i;
             }else if(contador == 3){
                 pos2 = i;
-                i = (int)archivo.length();
+                i = (int) archivo.length();
             }
         }
 
