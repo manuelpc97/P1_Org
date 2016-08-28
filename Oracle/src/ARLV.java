@@ -49,6 +49,19 @@ public class ARLV {
         }
 
     }
+    
+    public void addRegistro(String registro) throws IOException{
+        int tipoAdministracionRegistro = 0;
+        tipoAdministracionRegistro = this.getTipoAdministracionRegistros();
+        
+        if(tipoAdministracionRegistro == 1){
+            //Indicador de Longitud
+        }else if(tipoAdministracionRegistro == 2){
+            //Delimitadores
+        }else if(tipoAdministracionRegistro == 3){
+            //Tablas de Indice
+        }
+    }
 
     public int getTipoAdministracionRegistros() throws FileNotFoundException, IOException {
         int retorno = 0;
@@ -68,12 +81,11 @@ public class ARLV {
             }
         }
 
-        for (int i = posicion + 1; i < posicion2; i++) {
+        for (int i = posicion+1 ; i < posicion2+1; i++) {
             archivo.seek(i);
             number += ((char) archivo.readByte());
         }
-
-        retorno = Integer.parseInt(number);
+       retorno = Integer.parseInt(number);
         return retorno;
     }
     
@@ -96,10 +108,11 @@ public class ARLV {
             }
         }
         
-        for (int i = pos1+1; i < pos2; i++) {
+        for (int i = pos1+1; i < pos2+1; i++) {
             archivo.seek(i);
             numero+=((char)archivo.readByte());
         }
+        
         retorno = Integer.parseInt(numero);
         return retorno;
     }
@@ -114,22 +127,23 @@ public class ARLV {
         
         for (int i = 0; i < archivo.length(); i++) {
             archivo.seek(i);
-            if(((char)archivo.readByte()) == '|' && contador == 0){
+            if((((char)archivo.readByte()) == '|') && (contador == 0)){
                 contador++;
-            }else if(((char)archivo.readByte()) == '|' && contador == 1){
+            }else if((((char)archivo.readByte()) == '|') && (contador == 1)){
                 pos1 = i;
                 contador++;
-            }else if(((char)archivo.readByte()) == '|' && contador == 2){
+            }else if((((char)archivo.readByte()) == '|') && (contador == 2)){
                 pos2 = i;
                 i = (int)archivo.length();
             }
         }
         
-        for (int i = pos1+1; i < pos2; i++) {
+        for (int i = pos1; i < pos2; i++) {
             archivo.seek(i);
             numero+=((char)archivo.readByte());
         }
-        retorno = Integer.parseInt(numero);
+        //retorno = Integer.parseInt(numero);
+        System.out.println("3 " + numero);
         return retorno;
     }
 }
