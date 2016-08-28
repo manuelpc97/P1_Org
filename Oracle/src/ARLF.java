@@ -110,7 +110,10 @@ public class ARLF {
                 }
                 modelo.addRow(lista);
             } else {
-                System.out.println("borrado " + contador);
+                for (int i = 0; i < amountCampos; i++) {
+                    lista[i] = "";
+                }
+                modelo.addRow(lista);
                 numero += amountCampos * sizeCampo;
             }
             contador++;
@@ -203,5 +206,15 @@ public class ARLF {
                 borrados.push(temporal.pop());
             }
         }
+    }
+    
+    public boolean isFijo() throws FileNotFoundException, IOException{
+        RandomAccessFile file = new RandomAccessFile(direccion, "rw");
+        file.seek(0);
+        
+        if(((char)file.readByte()) == '1'){
+            return true;
+        }
+        return false;
     }
 }
