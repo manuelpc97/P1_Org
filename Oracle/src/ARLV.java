@@ -28,7 +28,6 @@ public class ARLV {
         direccion = dir;
     }
 
-    
     public ARLV(String nombre, int adminRegistro, int adminCampo) {
         direccion = "./" + nombre + ".txt";
         try {
@@ -49,17 +48,17 @@ public class ARLV {
         }
 
     }
-    
-    public void addRegistro(String registro) throws IOException{
+
+    public void addRegistro(String registro) throws IOException {
         int tipoAdministracionRegistro = 0;
         tipoAdministracionRegistro = this.getTipoAdministracionRegistros();
         //En este metodo se supone que ya recibis todos los campos compactados y todo, entonces aqui te encargas de 
         //organizar los REGISTROS segun el metodo que te toca, y de una vez lo escribis en el archivo.
-        if(tipoAdministracionRegistro == 1){
+        if (tipoAdministracionRegistro == 1) {
             //Indicador de Longitud
-        }else if(tipoAdministracionRegistro == 2){
+        } else if (tipoAdministracionRegistro == 2) {
             //Delimitadores
-        }else if(tipoAdministracionRegistro == 3){
+        } else if (tipoAdministracionRegistro == 3) {
             //Tablas de Indice
         }
     }
@@ -82,68 +81,96 @@ public class ARLV {
             }
         }
 
-        for (int i = posicion+1 ; i < posicion2+1; i++) {
+        for (int i = posicion + 1; i < posicion2 + 1; i++) {
             archivo.seek(i);
             number += ((char) archivo.readByte());
         }
-       retorno = Integer.parseInt(number);
+        retorno = Integer.parseInt(number);
         return retorno;
     }
-    
-    public int getTipoAdministracionCampos() throws FileNotFoundException, IOException{
+
+    public int getTipoAdministracionCampos() throws FileNotFoundException, IOException {
         int retorno = 0;
         int contador = 0;
         int pos1 = 0;
         int pos2 = 0;
         String numero = "";
-        RandomAccessFile archivo = new RandomAccessFile(direccion,"rw");
-        
+        RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+
         for (int i = 0; i < archivo.length(); i++) {
             archivo.seek(i);
-            if(((char)archivo.readByte()) == '|' && contador == 0){
+            if (((char) archivo.readByte()) == '|' && contador == 0) {
                 pos1 = i;
                 contador++;
-            }else if(((char)archivo.readByte()) == '|' && contador == 1){
+            } else if (((char) archivo.readByte()) == '|' && contador == 1) {
                 pos2 = i;
-                i = (int)archivo.length();
+                i = (int) archivo.length();
             }
         }
-        
-        for (int i = pos1+1; i < pos2+1; i++) {
+
+        for (int i = pos1 + 1; i < pos2 + 1; i++) {
             archivo.seek(i);
-            numero+=((char)archivo.readByte());
+            numero += ((char) archivo.readByte());
         }
-        
+
         retorno = Integer.parseInt(numero);
         return retorno;
     }
-    
-    public int getCantidadDeCampos() throws FileNotFoundException, IOException{
+
+    public int getCantidadDeCampos() throws FileNotFoundException, IOException {
         int retorno = 0;
         int contador = 0;
         int pos1 = 0;
         int pos2 = 0;
         String numero = "";
-        RandomAccessFile archivo = new RandomAccessFile(direccion,"rw");
-        
+        RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+
         for (int i = 0; i < archivo.length(); i++) {
             archivo.seek(i);
-            if((((char)archivo.readByte()) == '|') && (contador == 0)){
+            if(((char)archivo.readByte()) == '|'){
                 contador++;
-            }else if((((char)archivo.readByte()) == '|') && (contador == 1)){
+            }
+            if(contador == 2){
                 pos1 = i;
-                contador++;
-            }else if((((char)archivo.readByte()) == '|') && (contador == 2)){
+            }else if(contador == 3){
                 pos2 = i;
                 i = (int)archivo.length();
             }
         }
-        
+
         for (int i = pos1; i < pos2; i++) {
             archivo.seek(i);
-            numero+=((char)archivo.readByte());
+            numero += ((char) archivo.readByte());
         }
         retorno = Integer.parseInt(numero);
         return retorno;
+    }
+
+    public String[] getHeader() throws IOException {
+        String[] arr = new String[this.getCantidadDeCampos()];
+        RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
+        int posicion = 0;
+        int posicion2 = 0;
+        int contador = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = "";
+        }
+        for (int i = 0; i < archivo.length(); i++) {
+            archivo.seek(i);
+            if (((char) archivo.readByte()) == '^') {
+                posicion = i;
+            }else if(((char) archivo.readByte()) == '}'){
+                posicion2 = i;
+                i = (int)archivo.length();
+            }
+        }
+        String word = "";
+        for (int k = posicion+1 ; k < posicion2; k++) {
+            archivo.seek(k);
+            word+=((char)archivo.readByte());
+        }
+        arr = word.split("\\?");
+        return arr;
     }
 }
