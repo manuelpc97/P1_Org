@@ -629,7 +629,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_crearHeader2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearHeader2MouseClicked
 
-        header1+=this.tf_nombreHeader2.getText()+"?";
+        header1 += this.tf_nombreHeader2.getText() + "?";
         this.tf_nombreHeader2.setText("");
         this.contadorCampos++;
     }//GEN-LAST:event_bt_crearHeader2MouseClicked
@@ -650,29 +650,30 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_addRegistroARLVMouseClicked
 
     private void bt_fileChooserARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooserARLVMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = 0;
+        returnValue = fileChooser.showOpenDialog(this);
+        String nombre = "";
 
-       JFileChooser fileChooser = new JFileChooser();
-       int returnValue = 0;
-       returnValue = fileChooser.showOpenDialog(this);
-       String nombre = "";
-       
-       if(returnValue == JFileChooser.APPROVE_OPTION){
-           File file = fileChooser.getSelectedFile();
-           nombre = file.getName();
-           archivoVariable = new ARLV(nombre);
-       }
-       
-       String[] header;
-       DefaultTableModel modelo = new DefaultTableModel();
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            nombre = file.getName();
+            archivoVariable = new ARLV(nombre);
+        }
+
+        String[] header;
+        DefaultTableModel modelo = new DefaultTableModel();
         try {
             header = new String[archivoVariable.getCantidadDeCampos()];
             header = archivoVariable.getHeader();
             for (int i = 0; i < header.length; i++) {
                 modelo.addColumn(header[i]);
             }
+            archivoVariable.listar(modelo);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         this.jt_addRegistroARLV.setModel(modelo);
     }//GEN-LAST:event_bt_fileChooserARLVMouseClicked
 
@@ -688,21 +689,14 @@ public class Principal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+       
+ 
         for (int i = 0; i < cantCampos; i++) {
             campos[i] = JOptionPane.showInputDialog(this, "Ingrese un campo para su registro: ");
-
-            //Aqui vas a ir organizando tus CAMPOS segun el metodo que te toca, cada campo es campos[i]
-            //Al final cuando temines tu metodo vas a meter ese arreglo de strings en un solo string que se llama registro
-            //compactado, y ese registroCompactado es el que le vas a mandar al metodo addRegistro
             if (tipoAdministracionCampos == 1) {
                 //Indicadores de longitud
-            }else if(tipoAdministracionCampos == 2){
-                
-            }else if(tipoAdministracionCampos == 3){
-                //Key Value
             } else if (tipoAdministracionCampos == 2) {
-                campos[i] = campos[i] + "|";
+                campos[i] +="!";
             } else if (tipoAdministracionCampos == 3) {
                 //String[] camp=archivoVariable.
             }
@@ -711,18 +705,16 @@ public class Principal extends javax.swing.JFrame {
 
         if (tipoAdministracionCampos == 2) {
             for (int i = 0; i < campos.length; i++) {
-                registroCompactado = registroCompactado + campos[i];
+                System.out.println(i + ": " + campos[i]);
+                registroCompactado += campos[i];
             }
-            registroCompactado=registroCompactado+"]";
+            registroCompactado+="]";
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-
-
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
 
     private void bt_adARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adARLVMouseClicked
