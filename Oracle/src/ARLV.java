@@ -142,8 +142,7 @@ public class ARLV {
             archivo.seek(i);
             numero+=((char)archivo.readByte());
         }
-        //retorno = Integer.parseInt(numero);
-        System.out.println("3 " + numero);
+        retorno = Integer.parseInt(numero);
         return retorno;
     }
 }

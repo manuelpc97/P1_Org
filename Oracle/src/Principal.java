@@ -95,7 +95,6 @@ public class Principal extends javax.swing.JFrame {
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jd_menuCreacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -345,14 +344,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setForeground(java.awt.Color.red);
         jLabel2.setText("Oracle");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-
-        jButton1.setText("jButton1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
@@ -614,17 +605,6 @@ public class Principal extends javax.swing.JFrame {
         this.jd_nombrarCampos2.setVisible(false);
     }//GEN-LAST:event_bt_saveHeaderMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        archivoVariable = new ARLV("./variable.txt");
-        try {
-            System.out.println("AdminR " + archivoVariable.getTipoAdministracionRegistros());
-            System.out.println("AdminC " + archivoVariable.getTipoAdministracionCampos());
-            System.out.println("CantC " + archivoVariable.getCantidadDeCampos());
-        } catch (IOException ex) {
-            System.out.println("Esta Malo");
-        }
-    }//GEN-LAST:event_jButton1MouseClicked
-
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
         char encontrado;
@@ -762,7 +742,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_saveHeader;
     private javax.swing.JComboBox cb_adminCampos;
     private javax.swing.JComboBox cb_adminRegistros;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
