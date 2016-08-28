@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author manuel
  */
 public class ARLF {
-
     String direccion = "";
     Stack borrados = new Stack();
     String borrado = "";

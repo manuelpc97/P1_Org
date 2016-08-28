@@ -66,12 +66,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         bt_adARLF = new javax.swing.JButton();
         bt_adARLV = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         jd_addRegistro = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_addRegistroARLF = new javax.swing.JTable();
         BT_ADDREGISTROARLF = new javax.swing.JButton();
         bt_fileChooser = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         ppm_ARLF = new javax.swing.JPopupMenu();
         jmi_eliminar = new javax.swing.JMenuItem();
         jm_modificar = new javax.swing.JMenuItem();
@@ -97,14 +99,16 @@ public class Principal extends javax.swing.JFrame {
 
         bt_crearARLV.setText("Archivo de Longitud Varable");
         jd_menuCreacion.getContentPane().add(bt_crearARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 260, 80));
-        jd_menuCreacion.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 390));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
+        jd_menuCreacion.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 370));
 
         jd_crearARLF.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel6.setForeground(java.awt.Color.red);
         jLabel6.setText("Archivo de Longitud Fija");
-        jd_crearARLF.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        jd_crearARLF.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         jLabel7.setForeground(java.awt.Color.red);
         jLabel7.setText("Nombre del Archivo");
@@ -128,6 +132,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_crearARLF.getContentPane().add(bt_crearArchivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 140, 60));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
         jd_crearARLF.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 360));
 
         jd_nombrarCampos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,12 +162,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_nombrarCampos.getContentPane().add(bt_guardarHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 150, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Cajas-en-3D.jpg")); // NOI18N
         jd_nombrarCampos.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 250));
 
         jd_menuAdministracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel13.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel13.setForeground(java.awt.Color.red);
         jLabel13.setText("Menu Administracion");
-        jd_menuAdministracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 150, -1));
+        jd_menuAdministracion.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 240, 30));
 
         bt_adARLF.setText("Administracion ARLF");
         bt_adARLF.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,15 +179,20 @@ public class Principal extends javax.swing.JFrame {
                 bt_adARLFMouseClicked(evt);
             }
         });
-        jd_menuAdministracion.getContentPane().add(bt_adARLF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 160, -1));
+        jd_menuAdministracion.getContentPane().add(bt_adARLF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 160, 70));
 
-        bt_adARLV.setText("Administracion ARLF");
-        jd_menuAdministracion.getContentPane().add(bt_adARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 160, -1));
+        bt_adARLV.setText("Administracion ARLV");
+        jd_menuAdministracion.getContentPane().add(bt_adARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 160, 70));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
+        jd_menuAdministracion.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 300));
 
         jd_addRegistro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel15.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel15.setForeground(java.awt.Color.red);
         jLabel15.setText("Administracion ARLF");
-        jd_addRegistro.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 150, -1));
+        jd_addRegistro.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 250, -1));
 
         jt_addRegistroARLF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,6 +226,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_addRegistro.getContentPane().add(bt_fileChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg")); // NOI18N
+        jd_addRegistro.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 350));
 
         jmi_eliminar.setText("Eliminar Registro");
         jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +270,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setForeground(java.awt.Color.red);
         jLabel2.setText("Oracle");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 380));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg")); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -597,7 +617,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
