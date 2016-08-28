@@ -1,0 +1,1 @@
+2variable~2|1|3|^id¿nombre¿edad¿}
