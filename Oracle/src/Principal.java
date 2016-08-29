@@ -408,6 +408,11 @@ public class Principal extends javax.swing.JFrame {
         Seleccionar_relacion.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 190, 110));
 
         jButton3.setText("UNO A VARIOS");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         Seleccionar_relacion.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 190, 110));
 
         jButton4.setText("UNO A UNO");
@@ -469,6 +474,11 @@ public class Principal extends javax.swing.JFrame {
 
         UNO_A_UNO.getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 170, -1));
 
+        UNO_A_VARIOS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UNO_A_VARIOSMouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UNO_A_VARIOS.getContentPane().add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 170, -1));
@@ -480,6 +490,11 @@ public class Principal extends javax.swing.JFrame {
         });
         UNO_A_VARIOS.getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 170, -1));
 
+        jComboBox9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox9MouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 170, -1));
 
         jLabel25.setText("SELECCIONE LOS CAMPOS");
@@ -506,6 +521,11 @@ public class Principal extends javax.swing.JFrame {
         });
         UNO_A_VARIOS.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
 
+        jComboBox10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox10MouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, -1));
 
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
@@ -1101,9 +1121,9 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println("ese");
             }
             // System.out.println(campos[0]);
-            for (int i = 0; i < champ.length; i++) {
-                model.addElement(champ[i]);
-            }
+            
+                model.addElement(champ[0]);
+            
             this.jComboBox1.setModel(model);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1224,31 +1244,29 @@ public class Principal extends javax.swing.JFrame {
                     tabla2 = contenido.substring(delimitador1 + 1, delimitador2);
                     campo1 = contenido.substring(delimitador2 + 1, delimitador3);
                     campo2 = contenido.substring(delimitador3 + 1, contenido.length() - 1);
-                    
+
                     Node nodo1 = null;
-                    Node nodo2=null;
+                    Node nodo2 = null;
                     for (Node tablaseses : graph) {
-                        if(tablaseses.getId().equals(Tabla1)){
-                             nodo1 = (Node) (tablaseses);
+                        if (tablaseses.getId().equals(Tabla1)) {
+                            nodo1 = (Node) (tablaseses);
                         }
-                        if(tablaseses.getId().equals(tabla2)){
-                             nodo2 = (Node) (tablaseses);
+                        if (tablaseses.getId().equals(tabla2)) {
+                            nodo2 = (Node) (tablaseses);
                         }
-                        
+
                     }
-                    
-                    
+
                     graph.addEdge(contase + "", nodo1, nodo2).addAttribute("relacion", campo1 + "---" + campo2);
                     contase++;
-                    
-                    
-                    String mostrar="";
-                    mostrar=campo1 + "---" + campo2;
+
+                    String mostrar = "";
+                    mostrar = campo1 + "---" + campo2;
                     for (Node nodo : graph) {
                         nodo.addAttribute("label", nodo.getId());
                     }
                     for (Edge nodo : graph.getEachEdge()) {
-                        nodo.addAttribute("label", "" + mostrar  );
+                        nodo.addAttribute("label", "" + mostrar);
                     }
                     System.out.println(Tabla1);
                     System.out.println(tabla2);
@@ -1258,11 +1276,11 @@ public class Principal extends javax.swing.JFrame {
                     //Node nodo2 = (Node) this.jComboBox3.getSelectedItem();
                     //graph.addEdge(contador + " ", nodo1, nodo2).addAttribute("distance", Double.parseDouble(this.distancia.getValue().toString()));
                     //graph.display();
-                    
+
                 }
                 contador2 = 0;
                 contenido = "";
-                
+
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1272,6 +1290,105 @@ public class Principal extends javax.swing.JFrame {
         graph.display();
 
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        this.showDialog(this.UNO_A_VARIOS);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        //this.jComboBox9.removeAllItems();
+        //this.jComboBox10.removeAllItems();
+
+        String tabla1 = " ";
+        String tabla2 = " ";
+        String tabla = "";
+        char letra = ' ';
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                // System.out.println((char) archivo.readByte());
+                letra = (char) archivo.readByte();
+                if ('{' == letra) {
+
+                    model.addElement(tabla);
+
+                    tabla = "";
+                } else {
+
+                    tabla = tabla + letra;
+                }
+            }
+            this.jComboBox9.setModel(model);
+            this.jComboBox10.setModel(model);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void UNO_A_VARIOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UNO_A_VARIOSMouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox2.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            for (int i = 0; i < champ.length; i++) {
+                model.addElement(champ[i]);
+            }
+            this.jComboBox1.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_UNO_A_VARIOSMouseClicked
+
+    private void jComboBox9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox9MouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox9.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            //for (int i = 0; i < champ.length; i++) {
+            model.addElement(champ[0]);
+            //}
+            this.jComboBox7.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_jComboBox9MouseClicked
+
+    private void jComboBox10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox10MouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox10.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            for (int i = 0; i < champ.length; i++) {
+                model.addElement(champ[i]);
+            }
+            this.jComboBox8.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_jComboBox10MouseClicked
 
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
@@ -1496,6 +1613,6 @@ public class Principal extends javax.swing.JFrame {
     int contadorCampos = 0;
     ARLV archivoVariable = new ARLV();
     String campose = "";
-    int contase=0;
+    int contase = 0;
 
 }
