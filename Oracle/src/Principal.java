@@ -1,15 +1,21 @@
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeString.trim;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.algorithm.Dijkstra;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,8 +33,10 @@ public class Principal extends javax.swing.JFrame {
      */
     int conta_universal;
     String universo_universal = "";
+    SingleGraph graph = new SingleGraph("nodos");
 
     public Principal() {
+
         initComponents();
     }
 
@@ -128,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         jd_menuCreacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -399,6 +408,11 @@ public class Principal extends javax.swing.JFrame {
         Seleccionar_relacion.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 190, 110));
 
         jButton3.setText("UNO A VARIOS");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         Seleccionar_relacion.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 190, 110));
 
         jButton4.setText("UNO A UNO");
@@ -426,6 +440,11 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox2MouseClicked(evt);
             }
         });
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         UNO_A_UNO.getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 170, -1));
 
         jButton5.setText("Agregar");
@@ -446,10 +465,20 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox3MouseClicked(evt);
             }
         });
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
         UNO_A_UNO.getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 170, -1));
 
         UNO_A_UNO.getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 170, -1));
 
+        UNO_A_VARIOS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UNO_A_VARIOSMouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UNO_A_VARIOS.getContentPane().add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 170, -1));
@@ -461,6 +490,11 @@ public class Principal extends javax.swing.JFrame {
         });
         UNO_A_VARIOS.getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 170, -1));
 
+        jComboBox9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox9MouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 170, -1));
 
         jLabel25.setText("SELECCIONE LOS CAMPOS");
@@ -487,6 +521,11 @@ public class Principal extends javax.swing.JFrame {
         });
         UNO_A_VARIOS.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
 
+        jComboBox10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox10MouseClicked(evt);
+            }
+        });
         UNO_A_VARIOS.getContentPane().add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, -1));
 
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
@@ -539,6 +578,14 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 240, 70));
 
+        jButton8.setText("Ver ER");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 240, 50));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -565,7 +612,8 @@ public class Principal extends javax.swing.JFrame {
         try {
             RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
             archivo.seek(archivo.length());
-            String todo=nombreArchivo+"{";
+            String todo = nombreArchivo + "{";
+            graph.addNode(nombreArchivo);
             archivo.writeBytes(todo);
 
         } catch (FileNotFoundException ex) {
@@ -831,7 +879,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_saveHeaderMouseClicked
 
     private void jt_addRegistroARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_addRegistroARLVMouseClicked
-        if(evt.isMetaDown()){
+        if (evt.isMetaDown()) {
             this.ppm_eliminarARLV.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jt_addRegistroARLVMouseClicked
@@ -882,7 +930,7 @@ public class Principal extends javax.swing.JFrame {
         String registroCompactado = "";
         String[] campos = new String[this.jt_addRegistroARLV.getColumnCount()];
         String temporal = "";
-        
+
         try {
             tipoAdministracionCampos = archivoVariable.getTipoAdministracionCampos();
             cantCampos = archivoVariable.getCantidadDeCampos();
@@ -895,7 +943,7 @@ public class Principal extends javax.swing.JFrame {
             temporal = campos[i];
             if (tipoAdministracionCampos == 1) {
                 campos[i] = "";
-                campos[i]+=temporal.length()+":" +temporal;
+                campos[i] += temporal.length() + ":" + temporal;
             } else if (tipoAdministracionCampos == 3) {
                 campos[i] = campos[i] + "<";
 
@@ -929,17 +977,16 @@ public class Principal extends javax.swing.JFrame {
 
             registroCompactado = registroCompactado + "]";
 
-
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        if(tipoAdministracionCampos == 1){
+
+        if (tipoAdministracionCampos == 1) {
             for (int i = 0; i < campos.length; i++) {
-                registroCompactado+=campos[i];
+                registroCompactado += campos[i];
             }
 
             try {
@@ -970,7 +1017,7 @@ public class Principal extends javax.swing.JFrame {
 
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-          this.showDialog(this.Seleccionar_relacion);
+        this.showDialog(this.Seleccionar_relacion);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -999,8 +1046,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         String relacion = "";
-        relacion = "[" + "2" + this.jComboBox9.getSelectedItem() + "-" + this.jComboBox10.getSelectedItem() + ";" + this.jComboBox7.getSelectedItem() + ":" + campos + "]";
-        campos = "";
+        relacion = "[" + "2" + this.jComboBox9.getSelectedItem() + "-" + this.jComboBox10.getSelectedItem() + ";" + this.jComboBox7.getSelectedItem() + ":" + campose + "]";
+        campose = "";
         try {
             RandomAccessFile archivo = new RandomAccessFile("relaciones.txt", "rw");
             archivo.seek(archivo.length());
@@ -1017,7 +1064,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        campos = campos + this.jComboBox8.getSelectedItem() + ",";
+        campose = campose + this.jComboBox8.getSelectedItem() + ",";
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1037,23 +1084,24 @@ public class Principal extends javax.swing.JFrame {
         this.showDialog(this.UNO_A_UNO);
         this.jComboBox2.removeAllItems();
         this.jComboBox3.removeAllItems();
+        String tabla1 = " ";
+        String tabla2 = " ";
         String tabla = "";
-        char letra=' ';
-        try { 
+        char letra = ' ';
+        try {
             RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
             for (int i = 0; i < archivo.length(); i++) {
                 archivo.seek(i);
-                   // System.out.println((char) archivo.readByte());
-                   letra=(char) archivo.readByte();
+                // System.out.println((char) archivo.readByte());
+                letra = (char) archivo.readByte();
                 if ('{' == letra) {
-                    
-                    
+
                     this.jComboBox2.addItem(tabla);
                     this.jComboBox3.addItem(tabla);
-                    tabla="";
-                }else{
-                    
-                    tabla=tabla+ letra;
+                    tabla = "";
+                } else {
+
+                    tabla = tabla + letra;
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -1064,40 +1112,53 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
-       
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
         try {
             ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
-            
-            String[] campos =enviar_nombres(this.jComboBox2.getSelectedItem().toString());
-            for (int i = 0; i < campos.length; i++) {
-                this.jComboBox1.addItem(campos[i]);
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox2.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
             }
+            // System.out.println(campos[0]);
+            
+                model.addElement(champ[0]);
+            
+            this.jComboBox1.setModel(model);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
         }
     }//GEN-LAST:event_jComboBox2MouseClicked
 
     private void jComboBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox3MouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
         try {
-            String[] campos =enviar_nombres(this.jComboBox3.getSelectedItem().toString());
-            for (int i = 0; i < campos.length; i++) {
-                this.jComboBox5.addItem(campos[i]);
+            String[] champ = enviar_nombres((String) this.jComboBox3.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
             }
+            for (int i = 0; i < champ.length; i++) {
+                model.addElement(champ[i]);
+            }
+            this.jComboBox5.setModel(model);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBox3MouseClicked
 
     private void ji_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ji_deleteActionPerformed
-        archivoVariable.eliminar(this.jt_addRegistroARLV.getSelectedRow()+1);
-        
+        archivoVariable.eliminar(this.jt_addRegistroARLV.getSelectedRow() + 1);
+
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = (DefaultTableModel)this.jt_addRegistroARLV.getModel();
-        
-        while(modelo.getRowCount()>0){
+        modelo = (DefaultTableModel) this.jt_addRegistroARLV.getModel();
+
+        while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
-        
+
         try {
             modelo = archivoVariable.listar(modelo);
         } catch (IOException ex) {
@@ -1106,6 +1167,229 @@ public class Principal extends javax.swing.JFrame {
         this.jt_addRegistroARLV.setModel(modelo);
     }//GEN-LAST:event_ji_deleteActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String Tabla1;
+        String tabla2;
+        String campo1;
+        String campo2;
+        int delimitador1 = 0;
+        int delimitador2 = 0;
+        int delimitador3 = 0;
+        char letra = ' ';
+        String tabla = "";
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                // System.out.println((char) archivo.readByte());
+                letra = (char) archivo.readByte();
+                if ('{' == letra) {
+
+                    graph.addNode(tabla);
+                    tabla = "";
+                } else {
+
+                    tabla = tabla + letra;
+                }
+            }
+            graph.addNode("pipis");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            int contador = 0;
+            int contador2 = 0;
+            String contenido = "";
+            RandomAccessFile archivo = new RandomAccessFile("relaciones.txt", "rw");
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                if ((char) archivo.readByte() == '[') {
+                    contador++;
+                }
+                // System.out.println(contador);
+
+            }
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                if ((char) archivo.readByte() == '[') {
+                    for (int j = i + 1; j < archivo.length(); j++) {
+                        archivo.seek(j);
+                        contador2++;
+                        if ((char) archivo.readByte() == ']') {
+
+                            break;
+                        }
+                    }
+                    System.out.println(contador2);
+                    for (int j = i + 1; j < contador2 + i; j++) {
+                        archivo.seek(j);
+                        contenido = contenido + ((char) archivo.readByte());
+                    }
+                    contenido = contenido + ".";
+                    delimitador1 = contenido.indexOf("-");
+                    delimitador2 = contenido.indexOf(";");
+                    delimitador3 = contenido.indexOf(":");
+                    System.out.println(contenido);
+                    Tabla1 = contenido.substring(1, delimitador1);
+                    tabla2 = contenido.substring(delimitador1 + 1, delimitador2);
+                    campo1 = contenido.substring(delimitador2 + 1, delimitador3);
+                    campo2 = contenido.substring(delimitador3 + 1, contenido.length() - 1);
+
+                    Node nodo1 = null;
+                    Node nodo2 = null;
+                    for (Node tablaseses : graph) {
+                        if (tablaseses.getId().equals(Tabla1)) {
+                            nodo1 = (Node) (tablaseses);
+                        }
+                        if (tablaseses.getId().equals(tabla2)) {
+                            nodo2 = (Node) (tablaseses);
+                        }
+
+                    }
+
+                    graph.addEdge(contase + "", nodo1, nodo2).addAttribute("relacion", campo1 + "---" + campo2);
+                    contase++;
+
+                    String mostrar = "";
+                    mostrar = campo1 + "---" + campo2;
+                    for (Node nodo : graph) {
+                        nodo.addAttribute("label", nodo.getId());
+                    }
+                    for (Edge nodo : graph.getEachEdge()) {
+                        nodo.addAttribute("label", "" + mostrar);
+                    }
+                    System.out.println(Tabla1);
+                    System.out.println(tabla2);
+                    System.out.println(campo1);
+                    System.out.println(campo2);
+                    // Node nodo1 = (Node) (this.jComboBox4.getSelectedItem());
+                    //Node nodo2 = (Node) this.jComboBox3.getSelectedItem();
+                    //graph.addEdge(contador + " ", nodo1, nodo2).addAttribute("distance", Double.parseDouble(this.distancia.getValue().toString()));
+                    //graph.display();
+
+                }
+                contador2 = 0;
+                contenido = "";
+
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        graph.display();
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        this.showDialog(this.UNO_A_VARIOS);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        //this.jComboBox9.removeAllItems();
+        //this.jComboBox10.removeAllItems();
+
+        String tabla1 = " ";
+        String tabla2 = " ";
+        String tabla = "";
+        char letra = ' ';
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                // System.out.println((char) archivo.readByte());
+                letra = (char) archivo.readByte();
+                if ('{' == letra) {
+
+                    model.addElement(tabla);
+
+                    tabla = "";
+                } else {
+
+                    tabla = tabla + letra;
+                }
+            }
+            this.jComboBox9.setModel(model);
+            this.jComboBox10.setModel(model);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void UNO_A_VARIOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UNO_A_VARIOSMouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox2.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            for (int i = 0; i < champ.length; i++) {
+                model.addElement(champ[i]);
+            }
+            this.jComboBox1.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_UNO_A_VARIOSMouseClicked
+
+    private void jComboBox9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox9MouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox9.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            //for (int i = 0; i < champ.length; i++) {
+            model.addElement(champ[0]);
+            //}
+            this.jComboBox7.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_jComboBox9MouseClicked
+
+    private void jComboBox10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox10MouseClicked
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            System.out.println();
+            String[] champ = enviar_nombres((String) this.jComboBox10.getSelectedItem() + ".txt");
+            for (int i = 0; i < champ.length; i++) {
+                System.out.println("ese");
+            }
+            // System.out.println(campos[0]);
+            for (int i = 0; i < champ.length; i++) {
+                model.addElement(champ[i]);
+            }
+            this.jComboBox8.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("laaaaaaa");
+        }
+    }//GEN-LAST:event_jComboBox10MouseClicked
 
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
@@ -1256,6 +1540,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -1328,6 +1613,7 @@ public class Principal extends javax.swing.JFrame {
     int tipoAdministracionCampos = 0;
     int contadorCampos = 0;
     ARLV archivoVariable = new ARLV();
-    String campos = "";
+    String campose = "";
+    int contase = 0;
 
 }
