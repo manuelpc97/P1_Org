@@ -113,21 +113,21 @@ public class Principal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         UNO_A_UNO = new javax.swing.JDialog();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<String>();
-        jComboBox5 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
         UNO_A_VARIOS = new javax.swing.JDialog();
-        jComboBox7 = new javax.swing.JComboBox<String>();
-        jComboBox8 = new javax.swing.JComboBox<String>();
-        jComboBox9 = new javax.swing.JComboBox<String>();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jComboBox10 = new javax.swing.JComboBox<String>();
+        jComboBox10 = new javax.swing.JComboBox<>();
         VARIO_A_VARIOS = new javax.swing.JDialog();
-        jComboBox6 = new javax.swing.JComboBox<String>();
+        jComboBox6 = new javax.swing.JComboBox<>();
         ppm_eliminarARLV = new javax.swing.JPopupMenu();
         ji_delete = new javax.swing.JMenuItem();
         jm_modificarARLV = new javax.swing.JMenuItem();
@@ -160,6 +160,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_menuCreacion.getContentPane().add(bt_crearARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 260, 80));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/258211.jpg"))); // NOI18N
         jd_menuCreacion.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 370));
 
         jd_crearARLF.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -585,7 +587,7 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 240, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/manuel/Documentos/org/P1_Org/Oracle/src/Imagenes/wallpaper-cubes-blue.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background-213649_960_720.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, -190, 850, 690));
 
         pack();
