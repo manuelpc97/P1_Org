@@ -99,33 +99,30 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         bt_fileChooserARLV = new javax.swing.JButton();
         BT_ADDREGISTROARLV = new javax.swing.JButton();
-
         Seleccionar_relacion = new javax.swing.JDialog();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         UNO_A_UNO = new javax.swing.JDialog();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jButton5 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
+        jComboBox5 = new javax.swing.JComboBox<String>();
         UNO_A_VARIOS = new javax.swing.JDialog();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jComboBox9 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<String>();
+        jComboBox8 = new javax.swing.JComboBox<String>();
+        jComboBox9 = new javax.swing.JComboBox<String>();
         jLabel25 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jComboBox10 = new javax.swing.JComboBox<>();
+        jComboBox10 = new javax.swing.JComboBox<String>();
         VARIO_A_VARIOS = new javax.swing.JDialog();
-        jComboBox6 = new javax.swing.JComboBox<>();
-
+        jComboBox6 = new javax.swing.JComboBox<String>();
         ppm_eliminarARLV = new javax.swing.JPopupMenu();
         ji_delete = new javax.swing.JMenuItem();
         jm_modificarARLV = new javax.swing.JMenuItem();
-
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -396,7 +393,6 @@ public class Principal extends javax.swing.JFrame {
         });
         mostrar.getContentPane().add(BT_ADDREGISTROARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
 
-
         Seleccionar_relacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setText("VARIOS A VARIOS");
@@ -510,7 +506,6 @@ public class Principal extends javax.swing.JFrame {
         jm_modificarARLV.setText("Modificar Campo");
         ppm_eliminarARLV.add(jm_modificarARLV);
 
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -600,6 +595,7 @@ public class Principal extends javax.swing.JFrame {
             camposPorRegistro = 0;
             caracteresPorCampo = 0;
             contador = 0;
+            header1="";
             JOptionPane.showMessageDialog(this, "Campos nombrados exitosamente!!");
         } else {
             JOptionPane.showMessageDialog(this, "Aun le faltan campos por nombrar", "ERROR", JOptionPane.ERROR_MESSAGE);
