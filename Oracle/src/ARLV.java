@@ -36,7 +36,7 @@ public class ARLV {
 
     public ARLV(String nombre, int adminRegistro, int adminCampo) {
         direccion = "./" + nombre + ".txt";
-        this.dirBorrados = direccion + "borrado.txt";
+        this.dirBorrados = nombre + "borrado.txt";
         try {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
             archivo.writeBytes("2" + nombre + "~" + adminRegistro + "|" + adminCampo + "|");
@@ -58,6 +58,7 @@ public class ARLV {
     }
 
     public void addRegistro(String registro) throws IOException {
+        clean();
         int tipoAdministracionRegistro = 0;
         int sizeAnterior = 0;
         int posicionArchivo = 0;
@@ -72,39 +73,41 @@ public class ARLV {
                 int pos = 0;
                 pos = this.compare(registro);
                 int contador = 0;
-                
+
                 if (pos == 0) {
                     archivo.seek(archivo.length());
                     archivo.writeBytes((registro.length() + 1) + "]" + registro);
                 } else {
+                    String word = "";
                     int beginWriting = this.findPositionLong(pos);
                     int endWriting = 0;
-                    endWriting = this.findPosition(pos+1);
+                    endWriting = this.findPositionLong(pos + 1);
                     String concatenar = "";
                     concatenar = this.getSubString(endWriting);
                     
+                    word = registro;
+                    registro = (word.length()+1)+"]" +word;
+                    
                     for (int i = 0; i < registro.length(); i++) {
                         archivo.seek(beginWriting);
-                        beginWriting+=1;
+                        beginWriting += 1;
                         archivo.writeByte(registro.charAt(i));
                     }
-                    
-                    System.out.println(concatenar);
+
+                    System.out.println("Concatenar: " +concatenar);
                     for (int i = beginWriting; i < archivo.length(); i++) {
                         archivo.seek(i);
-                        if(contador<concatenar.length()){
+                        if (contador < concatenar.length()) {
                             archivo.writeByte(concatenar.charAt(contador));
                             contador++;
-                        }else{
+                        } else {
                             archivo.writeBytes(" ");
                         }
                     }
+                        saveStack();
                 }
             }
-            if (!borrados.isEmpty()) {
-                borrados.pop();
-                saveStack();
-            }
+
 //*****************************************************************************************
         } else if (tipoAdministracionRegistro == 2 || tipoAdministracionRegistro == 3) {
             RandomAccessFile archivo = new RandomAccessFile(direccion, "rw");
@@ -141,11 +144,8 @@ public class ARLV {
                             archivo.writeBytes(" ");
                         }
                     }
+                    saveStack();
                 }
-            }
-            if (!borrados.isEmpty()) {
-                borrados.pop();
-                saveStack();
             }
         }
     }
@@ -166,7 +166,7 @@ public class ARLV {
         RandomAccessFile file = new RandomAccessFile(direccion, "rw");
         int contador = 0;
         int inicio = 0;
-
+        
         for (int i = 0; i < file.length(); i++) {
             file.seek(i);
             if (((char) file.readByte()) == '}') {
@@ -174,19 +174,23 @@ public class ARLV {
                 i = (int) file.length();
             }
         }
-
-        for (int i = inicio + 1; i < file.length(); i++) {
-            file.seek(i);
-            if(((char)file.readByte()) == ']'){
-                if(contador == pos-1){
-                    retorno = i+1;
-                    i = (int)file.length();
-                }
-                contador++;
-            }
+        contador = inicio+1;
+        inicio+=1;
+        
+        for (int i = 1; i < pos; i++) {
+            file.seek(inicio);
+           while(((char)file.readByte())!=']'){
+               System.out.println("entra if");
+               contador++;
+               inicio+=1;
+               file.seek(inicio);
+           }
+           contador+=this.getSizeRegistro(i);
+           inicio+=this.getSizeRegistro(i);
         }
-
-        return retorno;
+        
+        System.out.println("cont: " + contador);
+        return contador;
     }
 
     public int findPosition(int numRegistro) throws FileNotFoundException, IOException {
@@ -227,6 +231,41 @@ public class ARLV {
         return retorno;
     }
 
+    public void clean() throws FileNotFoundException, IOException{
+        RandomAccessFile file = new RandomAccessFile(direccion, "rw");
+        String word = "";
+        int contador = 0;
+        String retorno = "";
+        String retorno2 = "";
+        
+        for (int i = 0; i < file.length(); i++) {
+            word+=((char)file.readByte());
+        }
+        
+        char[] arr = new char[word.length()];
+        contador = word.length()-1;
+        arr =  word.toCharArray();
+        
+        while(arr[contador] ==' '){
+            contador--;
+        }
+        
+        while(contador>0){
+            retorno+=arr[contador];
+            contador--;
+        }
+        retorno2 = "2";
+        for (int i = retorno.length()-1; i>=0; i--) {
+            retorno2+=retorno.charAt(i);
+        }
+        System.out.println("retorno2" + retorno2);
+        file.setLength(0);
+        
+        for (int i = 0; i < retorno2.length(); i++) {
+            file.writeByte(retorno2.charAt(i));
+        }
+    }
+    
     public int compare(String registro) throws IOException {
         int retorno = 0;
         Stack temporal = new Stack();
@@ -396,32 +435,36 @@ public class ARLV {
             }
 //****************************************************************************************************************
         } else if (adminRegistros == 3 && adminCampos == 3) {
+            String[] retorno = new String[cantCampos];
+            String palabra = "";
             String[] keyValue = new String[2];
-            String temporal = "";
+
             for (int i = inicio + 1; i < archivo.length(); i++) {
                 archivo.seek(i);
-                registro += ((char) archivo.readByte());
+                palabra += ((char) archivo.readByte());
+            }
+            if (palabra.length() != 0) {
+                System.out.println("palabra: " + palabra);
+                arrGrande = palabra.split("]");
+                System.out.println("size arrGRande: " + arrGrande.length);
+                
+                for (int i = 0; i < arrGrande.length; i++) {
+                    if (isBorrado(contador) == false) {
+                        arr = arrGrande[i].split("<");
+                        for (int k = 0; k < arr.length; k++) {
+                            keyValue = arr[k].split(":");
+                            retorno[k] = keyValue[1];
+                        }
+                    } else {
+                        for (int j = 0; j < retorno.length; j++) {
+                            retorno[j] = "";
+                        }
+                    }
+                    contador++;
+                    modelo.addRow(retorno);
+                }
             }
 
-            arrGrande = registro.split("]");
-            String[] retorno = new String[2];
-            for (int i = 0; i < arrGrande.length; i++) {
-                retorno = new String[arr.length];
-                if (this.isBorrado(contador) == false) {
-                    ultimo = 0;
-                    arr = arrGrande[i].split("<");
-                    for (int k = 0; k < arr.length; k++) {
-                        keyValue = arr[k].split(":");
-                        retorno[k] = keyValue[1];
-                    }
-                } else {
-                    for (int j = 0; j < retorno.length; j++) {
-                        retorno[j] = "";
-                    }
-                }
-                contador++;
-                modelo.addRow(retorno);
-            }
 //*********************************************************************************************************************            
         } else if (adminRegistros == 1 && adminCampos == 1) {
             String numero = "";
