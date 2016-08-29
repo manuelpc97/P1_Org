@@ -1399,7 +1399,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.removeAllElements();
         try {
-            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+//            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
             System.out.println();
             String[] champ = enviar_nombres((String) this.jComboBox9.getSelectedItem() + ".txt");
             for (int i = 0; i < champ.length; i++) {
@@ -1420,7 +1420,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.removeAllElements();
         try {
-            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+//            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
             System.out.println();
             String[] champ = enviar_nombres((String) this.jComboBox10.getSelectedItem() + ".txt");
             for (int i = 0; i < champ.length; i++) {
