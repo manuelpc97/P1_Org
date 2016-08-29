@@ -99,6 +99,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         bt_fileChooserARLV = new javax.swing.JButton();
         BT_ADDREGISTROARLV = new javax.swing.JButton();
+
         Seleccionar_relacion = new javax.swing.JDialog();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -120,6 +121,11 @@ public class Principal extends javax.swing.JFrame {
         jComboBox10 = new javax.swing.JComboBox<>();
         VARIO_A_VARIOS = new javax.swing.JDialog();
         jComboBox6 = new javax.swing.JComboBox<>();
+
+        ppm_eliminarARLV = new javax.swing.JPopupMenu();
+        ji_delete = new javax.swing.JMenuItem();
+        jm_modificarARLV = new javax.swing.JMenuItem();
+
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -283,7 +289,7 @@ public class Principal extends javax.swing.JFrame {
         ppm_ARLF.add(jmi_eliminar);
         jmi_eliminar.getAccessibleContext().setAccessibleName("Eliminar");
 
-        jm_modificar.setText("jMenuItem1");
+        jm_modificar.setText("Modificar Campo");
         jm_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jm_modificarActionPerformed(evt);
@@ -390,6 +396,7 @@ public class Principal extends javax.swing.JFrame {
         });
         mostrar.getContentPane().add(BT_ADDREGISTROARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
 
+
         Seleccionar_relacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setText("VARIOS A VARIOS");
@@ -491,6 +498,18 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox6ActionPerformed(evt);
             }
         });
+
+        ji_delete.setText("Eliminar Registro");
+        ji_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ji_deleteActionPerformed(evt);
+            }
+        });
+        ppm_eliminarARLV.add(ji_delete);
+
+        jm_modificarARLV.setText("Modificar Campo");
+        ppm_eliminarARLV.add(jm_modificarARLV);
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -607,26 +626,36 @@ public class Principal extends javax.swing.JFrame {
             nombre = file.getName();
             archivoFijo = new ARLF(file.getName());
         }
-
-        DefaultTableModel modelo = new DefaultTableModel();
-        String[] header = new String[fijo];
-        String registroUnido = "";
-
+        boolean seguir = true;
         try {
-            header = enviar_nombres(nombre);
-            for (int i = 0; i < header.length; i++) {
-                modelo.addColumn(header[i]);
-            }
-        } catch (IOException ex) {
-            System.out.println("Metodo Fiallos");
-        }
-        try {
-            modelo = archivoFijo.listar(modelo, sizeCampo, amountCampos);
+            seguir = archivoFijo.isFijo();
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.jt_addRegistroARLF.setModel(modelo);
-        fijo = header.length;
+
+        if (seguir) {
+            DefaultTableModel modelo = new DefaultTableModel();
+            String[] header = new String[fijo];
+            String registroUnido = "";
+
+            try {
+                header = enviar_nombres(nombre);
+                for (int i = 0; i < header.length; i++) {
+                    modelo.addColumn(header[i]);
+                }
+            } catch (IOException ex) {
+                System.out.println("Metodo Fiallos");
+            }
+            try {
+                modelo = archivoFijo.listar(modelo, sizeCampo, amountCampos);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.jt_addRegistroARLF.setModel(modelo);
+            fijo = header.length;
+        } else {
+            JOptionPane.showMessageDialog(this, "El archivo que usted ha seleccionado no es Fijo");
+        }
     }//GEN-LAST:event_bt_fileChooserMouseClicked
 
     private void BT_ADDREGISTROARLFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_ADDREGISTROARLFMouseClicked
@@ -789,7 +818,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BT_CREARALRVMouseClicked
 
     private void bt_crearHeader2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearHeader2MouseClicked
-
         header1 += this.tf_nombreHeader2.getText() + "?";
         this.tf_nombreHeader2.setText("");
         this.contadorCampos++;
@@ -807,34 +835,49 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_saveHeaderMouseClicked
 
     private void jt_addRegistroARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_addRegistroARLVMouseClicked
-        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            this.ppm_eliminarARLV.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
     }//GEN-LAST:event_jt_addRegistroARLVMouseClicked
 
     private void bt_fileChooserARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooserARLVMouseClicked
-
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = 0;
         returnValue = fileChooser.showOpenDialog(this);
         String nombre = "";
+
+        returnValue = fileChooser.showOpenDialog(this);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             nombre = file.getName();
             archivoVariable = new ARLV(nombre);
         }
-
-        String[] header;
-        DefaultTableModel modelo = new DefaultTableModel();
+        boolean seguir = true;
         try {
-            header = new String[archivoVariable.getCantidadDeCampos()];
-            header = archivoVariable.getHeader();
-            for (int i = 0; i < header.length; i++) {
-                modelo.addColumn(header[i]);
-            }
+            seguir = archivoVariable.isVariable();
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.jt_addRegistroARLV.setModel(modelo);
+
+        if (seguir) {
+            String[] header;
+            DefaultTableModel modelo = new DefaultTableModel();
+            try {
+                header = new String[archivoVariable.getCantidadDeCampos()];
+                header = archivoVariable.getHeader();
+                for (int i = 0; i < header.length; i++) {
+                    modelo.addColumn(header[i]);
+                }
+                modelo = archivoVariable.listar(modelo);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.jt_addRegistroARLV.setModel(modelo);
+        } else {
+            JOptionPane.showMessageDialog(this, "El archivo que usted selecciono no es un archivo variable");
+        }
     }//GEN-LAST:event_bt_fileChooserARLVMouseClicked
 
     private void BT_ADDREGISTROARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_ADDREGISTROARLVMouseClicked
@@ -842,7 +885,8 @@ public class Principal extends javax.swing.JFrame {
         int tipoAdministracionCampos = 0;
         String registroCompactado = "";
         String[] campos = new String[this.jt_addRegistroARLV.getColumnCount()];
-
+        String temporal = "";
+        
         try {
             tipoAdministracionCampos = archivoVariable.getTipoAdministracionCampos();
             cantCampos = archivoVariable.getCantidadDeCampos();
@@ -852,29 +896,24 @@ public class Principal extends javax.swing.JFrame {
 
         for (int i = 0; i < cantCampos; i++) {
             campos[i] = JOptionPane.showInputDialog(this, "Ingrese un campo para su registro: ");
-
-            //Aqui vas a ir organizando tus CAMPOS segun el metodo que te toca, cada campo es campos[i]
-            //Al final cuando temines tu metodo vas a meter ese arreglo de strings en un solo string que se llama registro
-            //compactado, y ese registroCompactado es el que le vas a mandar al metodo addRegistro
+            temporal = campos[i];
             if (tipoAdministracionCampos == 1) {
-                //Indicadores de longitud
-            } else if (tipoAdministracionCampos == 2) {
-
+                campos[i] = "";
+                campos[i]+=temporal.length()+":" +temporal;
             } else if (tipoAdministracionCampos == 3) {
                 campos[i] = campos[i] + "<";
+
             } else if (tipoAdministracionCampos == 2) {
-                campos[i] = campos[i] + "|";
-            } else if (tipoAdministracionCampos == 3) {
-                //String[] camp=archivoVariable.
+                campos[i] += "!";
             }
 
         }
 
         if (tipoAdministracionCampos == 2) {
             for (int i = 0; i < campos.length; i++) {
-                registroCompactado = registroCompactado + campos[i];
+                registroCompactado += campos[i];
             }
-            registroCompactado = registroCompactado + "]";
+            registroCompactado += "]";
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
@@ -894,6 +933,19 @@ public class Principal extends javax.swing.JFrame {
 
             registroCompactado = registroCompactado + "]";
 
+
+            try {
+                archivoVariable.addRegistro(registroCompactado);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if(tipoAdministracionCampos == 1){
+            for (int i = 0; i < campos.length; i++) {
+                registroCompactado+=campos[i];
+            }
+
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
@@ -901,13 +953,25 @@ public class Principal extends javax.swing.JFrame {
             }
         }
 
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) this.jt_addRegistroARLV.getModel();
 
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        try {
+            modelo = archivoVariable.listar(modelo);
+        } catch (Exception e) {
+        }
+        this.jt_addRegistroARLV.setModel(modelo);
     }//GEN-LAST:event_BT_ADDREGISTROARLVMouseClicked
 
     private void bt_adARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adARLVMouseClicked
         this.jd_menuAdministracion.setVisible(false);
         this.showDialog(mostrar);
     }//GEN-LAST:event_bt_adARLVMouseClicked
+
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
           this.showDialog(this.Seleccionar_relacion);
@@ -1007,6 +1071,7 @@ public class Principal extends javax.swing.JFrame {
        
         try {
             ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            
             String[] campos =enviar_nombres(this.jComboBox2.getSelectedItem().toString());
             for (int i = 0; i < campos.length; i++) {
                 this.jComboBox1.addItem(campos[i]);
@@ -1026,6 +1091,25 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBox3MouseClicked
+
+    private void ji_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ji_deleteActionPerformed
+        archivoVariable.eliminar(this.jt_addRegistroARLV.getSelectedRow()+1);
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)this.jt_addRegistroARLV.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);
+        }
+        
+        try {
+            modelo = archivoVariable.listar(modelo);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.jt_addRegistroARLV.setModel(modelo);
+    }//GEN-LAST:event_ji_deleteActionPerformed
+
 
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
@@ -1219,7 +1303,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_menuCreacion;
     private javax.swing.JDialog jd_nombrarCampos;
     private javax.swing.JDialog jd_nombrarCampos2;
+    private javax.swing.JMenuItem ji_delete;
     private javax.swing.JMenuItem jm_modificar;
+    private javax.swing.JMenuItem jm_modificarARLV;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JSpinner js_campoR1;
     private javax.swing.JSpinner js_caracteresC1;
@@ -1227,6 +1313,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_addRegistroARLV;
     private javax.swing.JDialog mostrar;
     private javax.swing.JPopupMenu ppm_ARLF;
+    private javax.swing.JPopupMenu ppm_eliminarARLV;
     private javax.swing.JTextField tf_nombreARLF1;
     private javax.swing.JTextField tf_nombreARLV;
     private javax.swing.JTextField tf_nombreHeader;

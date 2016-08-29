@@ -1,1 +1,1 @@
-Amigos~4|6|^Nombre?edad?id?clases?}manuel19____123___org___Carcam19____27627_fisicaariel_22____ecua__1267__xiomi_19____276___ecua__
+1Amigos~3|6|^id?nombre?edad?}123___manuel19____133___jose__20____1234__felix_19____
