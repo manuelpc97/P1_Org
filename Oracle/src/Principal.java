@@ -16,6 +16,7 @@ import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.xml.sax.Attributes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -1226,6 +1227,7 @@ public class Principal extends javax.swing.JFrame {
         String tabla2;
         String campo1;
         String campo2;
+        String mostrar="";
         int delimitador1 = 0;
         int delimitador2 = 0;
         int delimitador3 = 0;
@@ -1306,8 +1308,8 @@ public class Principal extends javax.swing.JFrame {
 
                     graph.addEdge(contase + "", nodo1, nodo2).addAttribute("relacion", campo1 + "---" + campo2);
                     contase++;
-
-                    String mostrar = "";
+                    
+                    mostrar = "";
                     mostrar = campo1 + "---" + campo2;
                     for (Node nodo : graph) {
                         nodo.addAttribute("label", nodo.getId());
@@ -1315,6 +1317,7 @@ public class Principal extends javax.swing.JFrame {
                     for (Edge nodo : graph.getEachEdge()) {
                         nodo.addAttribute("label", "" + mostrar);
                     }
+                     graph.display();
                     System.out.println(Tabla1);
                     System.out.println(tabla2);
                     System.out.println(campo1);
@@ -1334,7 +1337,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        graph.display();
+       
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
