@@ -98,6 +98,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         bt_fileChooserARLV = new javax.swing.JButton();
         BT_ADDREGISTROARLV = new javax.swing.JButton();
+        ppm_eliminarARLV = new javax.swing.JPopupMenu();
+        ji_delete = new javax.swing.JMenuItem();
+        jm_modificarARLV = new javax.swing.JMenuItem();
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -260,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
         ppm_ARLF.add(jmi_eliminar);
         jmi_eliminar.getAccessibleContext().setAccessibleName("Eliminar");
 
-        jm_modificar.setText("jMenuItem1");
+        jm_modificar.setText("Modificar Campo");
         jm_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jm_modificarActionPerformed(evt);
@@ -361,6 +364,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mostrar.getContentPane().add(BT_ADDREGISTROARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
+
+        ji_delete.setText("Eliminar Registro");
+        ji_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ji_deleteActionPerformed(evt);
+            }
+        });
+        ppm_eliminarARLV.add(ji_delete);
+
+        jm_modificarARLV.setText("Modificar Campo");
+        ppm_eliminarARLV.add(jm_modificarARLV);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -655,7 +669,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_saveHeaderMouseClicked
 
     private void jt_addRegistroARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_addRegistroARLVMouseClicked
-        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            this.ppm_eliminarARLV.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
     }//GEN-LAST:event_jt_addRegistroARLVMouseClicked
 
     private void bt_fileChooserARLVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_fileChooserARLVMouseClicked
@@ -787,6 +803,24 @@ public class Principal extends javax.swing.JFrame {
         this.jd_menuAdministracion.setVisible(false);
         this.showDialog(mostrar);
     }//GEN-LAST:event_bt_adARLVMouseClicked
+
+    private void ji_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ji_deleteActionPerformed
+        archivoVariable.eliminar(this.jt_addRegistroARLV.getSelectedRow()+1);
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)this.jt_addRegistroARLV.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);
+        }
+        
+        try {
+            modelo = archivoVariable.listar(modelo);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.jt_addRegistroARLV.setModel(modelo);
+    }//GEN-LAST:event_ji_deleteActionPerformed
 
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
@@ -958,7 +992,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_menuCreacion;
     private javax.swing.JDialog jd_nombrarCampos;
     private javax.swing.JDialog jd_nombrarCampos2;
+    private javax.swing.JMenuItem ji_delete;
     private javax.swing.JMenuItem jm_modificar;
+    private javax.swing.JMenuItem jm_modificarARLV;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JSpinner js_campoR1;
     private javax.swing.JSpinner js_caracteresC1;
@@ -966,6 +1002,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_addRegistroARLV;
     private javax.swing.JDialog mostrar;
     private javax.swing.JPopupMenu ppm_ARLF;
+    private javax.swing.JPopupMenu ppm_eliminarARLV;
     private javax.swing.JTextField tf_nombreARLF1;
     private javax.swing.JTextField tf_nombreARLV;
     private javax.swing.JTextField tf_nombreHeader;
