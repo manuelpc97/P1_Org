@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.NativeString.trim;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -98,10 +99,32 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         bt_fileChooserARLV = new javax.swing.JButton();
         BT_ADDREGISTROARLV = new javax.swing.JButton();
+        Seleccionar_relacion = new javax.swing.JDialog();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        UNO_A_UNO = new javax.swing.JDialog();
+        jLabel24 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        UNO_A_VARIOS = new javax.swing.JDialog();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jComboBox10 = new javax.swing.JComboBox<>();
+        VARIO_A_VARIOS = new javax.swing.JDialog();
+        jComboBox6 = new javax.swing.JComboBox<>();
         bt_crearArchivos = new javax.swing.JButton();
         bt_adminArchivos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jd_menuCreacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -289,6 +312,11 @@ public class Principal extends javax.swing.JFrame {
                 BT_CREARALRVMouseClicked(evt);
             }
         });
+        BT_CREARALRV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_CREARALRVActionPerformed(evt);
+            }
+        });
         jd_crearARLV.getContentPane().add(BT_CREARALRV, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 70, -1));
 
         cb_adminRegistros.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Indicador Longitud", "Delimitadores", "Tabla Indice" }));
@@ -362,6 +390,108 @@ public class Principal extends javax.swing.JFrame {
         });
         mostrar.getContentPane().add(BT_ADDREGISTROARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
 
+        Seleccionar_relacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setText("VARIOS A VARIOS");
+        Seleccionar_relacion.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 190, 110));
+
+        jButton3.setText("UNO A VARIOS");
+        Seleccionar_relacion.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 190, 110));
+
+        jButton4.setText("UNO A UNO");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        Seleccionar_relacion.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 190, 110));
+
+        UNO_A_UNO.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setText("SELECCIONE LOS CAMPOS");
+        UNO_A_UNO.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+
+        UNO_A_UNO.getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 170, -1));
+
+        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseClicked(evt);
+            }
+        });
+        UNO_A_UNO.getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 170, -1));
+
+        jButton5.setText("Agregar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        UNO_A_UNO.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+
+        jComboBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox3MouseClicked(evt);
+            }
+        });
+        UNO_A_UNO.getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 170, -1));
+
+        UNO_A_UNO.getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 170, -1));
+
+        UNO_A_VARIOS.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UNO_A_VARIOS.getContentPane().add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 170, -1));
+
+        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox8ActionPerformed(evt);
+            }
+        });
+        UNO_A_VARIOS.getContentPane().add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 170, -1));
+
+        UNO_A_VARIOS.getContentPane().add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 170, -1));
+
+        jLabel25.setText("SELECCIONE LOS CAMPOS");
+        UNO_A_VARIOS.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
+
+        jButton6.setText("Agregar");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        UNO_A_VARIOS.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
+
+        jButton7.setText("Agregar campo");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        UNO_A_VARIOS.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
+
+        UNO_A_VARIOS.getContentPane().add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, -1));
+
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -385,7 +515,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setForeground(java.awt.Color.red);
         jLabel2.setText("Oracle");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, -190, 680, 450));
+
+        jButton1.setText("Crear relaciones");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 240, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -410,6 +548,19 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Su archivo ha sido creado exitosamente!!");
         this.jd_crearARLF.setVisible(false);
         this.showDialog(this.jd_nombrarCampos);
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            archivo.seek(archivo.length());
+            String todo=nombreArchivo+"{";
+            archivo.writeBytes(todo);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_bt_crearArchivo1MouseClicked
 
     private void bt_nombrarHeaderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_nombrarHeaderMouseClicked
@@ -625,6 +776,16 @@ public class Principal extends javax.swing.JFrame {
         this.tf_nombreARLV.setText(name);
         this.jd_crearARLV.setVisible(false);
         this.showDialog(this.jd_nombrarCampos2);
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            archivo.seek(archivo.length());
+            archivo.writeBytes(trim(this.tf_nombreARLV.getText()) + "{");
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BT_CREARALRVMouseClicked
 
     private void bt_crearHeader2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearHeader2MouseClicked
@@ -724,7 +885,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 String[] key = archivoVariable.getHeader();
                 for (int i = 0; i < campos.length; i++) {
-                    registroCompactado = registroCompactado +key[i] + " : " + campos[i];
+                    registroCompactado = registroCompactado + key[i] + " : " + campos[i];
 
                 }
             } catch (IOException ex) {
@@ -732,7 +893,7 @@ public class Principal extends javax.swing.JFrame {
             }
 
             registroCompactado = registroCompactado + "]";
-            
+
             try {
                 archivoVariable.addRegistro(registroCompactado);
             } catch (IOException ex) {
@@ -747,6 +908,124 @@ public class Principal extends javax.swing.JFrame {
         this.jd_menuAdministracion.setVisible(false);
         this.showDialog(mostrar);
     }//GEN-LAST:event_bt_adARLVMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+          this.showDialog(this.Seleccionar_relacion);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void BT_CREARALRVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_CREARALRVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BT_CREARALRVActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        String relacion = "";
+        relacion = "[" + "1" + this.jComboBox2.getSelectedItem() + "-" + this.jComboBox3.getSelectedItem() + ";" + this.jComboBox1.getSelectedItem() + ":" + this.jComboBox5.getSelectedItem() + "]";
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("relaciones.txt", "rw");
+            archivo.seek(archivo.length());
+            archivo.writeBytes(relacion);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        String relacion = "";
+        relacion = "[" + "2" + this.jComboBox9.getSelectedItem() + "-" + this.jComboBox10.getSelectedItem() + ";" + this.jComboBox7.getSelectedItem() + ":" + campos + "]";
+        campos = "";
+        try {
+            RandomAccessFile archivo = new RandomAccessFile("relaciones.txt", "rw");
+            archivo.seek(archivo.length());
+            archivo.writeBytes(relacion);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        campos = campos + this.jComboBox8.getSelectedItem() + ",";
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox8ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        this.showDialog(this.UNO_A_UNO);
+        this.jComboBox2.removeAllItems();
+        this.jComboBox3.removeAllItems();
+        String tabla = "";
+        char letra=' ';
+        try { 
+            RandomAccessFile archivo = new RandomAccessFile("tablas.txt", "rw");
+            for (int i = 0; i < archivo.length(); i++) {
+                archivo.seek(i);
+                   // System.out.println((char) archivo.readByte());
+                   letra=(char) archivo.readByte();
+                if ('{' == letra) {
+                    
+                    
+                    this.jComboBox2.addItem(tabla);
+                    this.jComboBox3.addItem(tabla);
+                    tabla="";
+                }else{
+                    
+                    tabla=tabla+ letra;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
+       
+        try {
+            ARLF nombre = new ARLF(this.jComboBox2.getSelectedItem().toString());
+            String[] campos =enviar_nombres(this.jComboBox2.getSelectedItem().toString());
+            for (int i = 0; i < campos.length; i++) {
+                this.jComboBox1.addItem(campos[i]);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox2MouseClicked
+
+    private void jComboBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox3MouseClicked
+        try {
+            String[] campos =enviar_nombres(this.jComboBox3.getSelectedItem().toString());
+            for (int i = 0; i < campos.length; i++) {
+                this.jComboBox5.addItem(campos[i]);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox3MouseClicked
 
     public String[] enviar_nombres(String name) throws FileNotFoundException, IOException {
         RandomAccessFile archivo = new RandomAccessFile(name, "rw");
@@ -871,6 +1150,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BT_ADDREGISTROARLF;
     private javax.swing.JButton BT_ADDREGISTROARLV;
     private javax.swing.JButton BT_CREARALRV;
+    private javax.swing.JDialog Seleccionar_relacion;
+    private javax.swing.JDialog UNO_A_UNO;
+    private javax.swing.JDialog UNO_A_VARIOS;
+    private javax.swing.JDialog VARIO_A_VARIOS;
     private javax.swing.JButton bt_adARLF;
     private javax.swing.JButton bt_adARLV;
     private javax.swing.JButton bt_adminArchivos;
@@ -886,6 +1169,22 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_saveHeader;
     private javax.swing.JComboBox cb_adminCampos;
     private javax.swing.JComboBox cb_adminRegistros;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox10;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -902,6 +1201,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -944,4 +1245,6 @@ public class Principal extends javax.swing.JFrame {
     int tipoAdministracionCampos = 0;
     int contadorCampos = 0;
     ARLV archivoVariable = new ARLV();
+    String campos = "";
+
 }
