@@ -1246,7 +1246,7 @@ public class Principal extends javax.swing.JFrame {
                     tabla = tabla + letra;
                 }
             }
-            graph.addNode("pipis");
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
