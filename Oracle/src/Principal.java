@@ -95,22 +95,26 @@ public class Principal extends javax.swing.JFrame {
         BT_CREARALRV = new javax.swing.JButton();
         cb_adminRegistros = new javax.swing.JComboBox();
         cb_adminCampos = new javax.swing.JComboBox();
+        jLabel26 = new javax.swing.JLabel();
         jd_nombrarCampos2 = new javax.swing.JDialog();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         tf_nombreHeader2 = new javax.swing.JTextField();
         bt_crearHeader2 = new javax.swing.JButton();
         bt_saveHeader = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
         mostrar = new javax.swing.JDialog();
         jScrollPane4 = new javax.swing.JScrollPane();
         jt_addRegistroARLV = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         bt_fileChooserARLV = new javax.swing.JButton();
         BT_ADDREGISTROARLV = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
         Seleccionar_relacion = new javax.swing.JDialog();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         UNO_A_UNO = new javax.swing.JDialog();
         jLabel24 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -118,6 +122,7 @@ public class Principal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel30 = new javax.swing.JLabel();
         UNO_A_VARIOS = new javax.swing.JDialog();
         jComboBox7 = new javax.swing.JComboBox<>();
         jComboBox8 = new javax.swing.JComboBox<>();
@@ -126,6 +131,7 @@ public class Principal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jComboBox10 = new javax.swing.JComboBox<>();
+        jLabel31 = new javax.swing.JLabel();
         VARIO_A_VARIOS = new javax.swing.JDialog();
         jComboBox6 = new javax.swing.JComboBox<>();
         ppm_eliminarARLV = new javax.swing.JPopupMenu();
@@ -193,6 +199,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_crearARLF.getContentPane().add(bt_crearArchivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 140, 60));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo negro relieve verde.jpg"))); // NOI18N
         jd_crearARLF.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 360));
 
         jd_nombrarCampos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -221,6 +229,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_nombrarCampos.getContentPane().add(bt_guardarHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 150, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/darkbg.jpg"))); // NOI18N
         jd_nombrarCampos.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 250));
 
         jd_menuAdministracion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -245,6 +255,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_menuAdministracion.getContentPane().add(bt_adARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 160, 70));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wallpaper-cubes-blue.jpg"))); // NOI18N
         jd_menuAdministracion.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 300));
 
         jd_addRegistro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -286,6 +298,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_addRegistro.getContentPane().add(bt_fileChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/258211.jpg"))); // NOI18N
         jd_addRegistro.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 350));
 
         jmi_eliminar.setText("Eliminar Registro");
@@ -339,11 +353,18 @@ public class Principal extends javax.swing.JFrame {
         cb_adminCampos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Indicador Longitud", "Delimitadores", "Key Value" }));
         jd_crearARLV.getContentPane().add(cb_adminCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 180, 30));
 
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background-213649_960_720.jpg"))); // NOI18N
+        jLabel26.setText("jLabel26");
+        jd_crearARLV.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 300));
+
         jd_nombrarCampos2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel21.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 0, 0));
         jLabel21.setText("Nombrar Campos");
-        jd_nombrarCampos2.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
+        jd_nombrarCampos2.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 200, 40));
 
+        jLabel22.setForeground(new java.awt.Color(255, 0, 0));
         jLabel22.setText("Nombre");
         jd_nombrarCampos2.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
         jd_nombrarCampos2.getContentPane().add(tf_nombreHeader2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 190, -1));
@@ -363,6 +384,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jd_nombrarCampos2.getContentPane().add(bt_saveHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, -1));
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wallpaper-cubes-blue.jpg"))); // NOI18N
+        jd_nombrarCampos2.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -3, 490, 280));
 
         mostrar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -404,6 +428,10 @@ public class Principal extends javax.swing.JFrame {
         });
         mostrar.getContentPane().add(BT_ADDREGISTROARLV, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 130, -1));
 
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/258211.jpg"))); // NOI18N
+        jLabel28.setText("jLabel28");
+        mostrar.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -3, 710, 300));
+
         Seleccionar_relacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setText("VARIOS A VARIOS");
@@ -429,6 +457,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         Seleccionar_relacion.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 190, 110));
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Black-and-Blue-3D-4K-Wallpaper-the-alphabet-39220421-3840-2160.jpg"))); // NOI18N
+        jLabel29.setText("jLabel29");
+        Seleccionar_relacion.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 470));
 
         UNO_A_UNO.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -476,6 +508,10 @@ public class Principal extends javax.swing.JFrame {
 
         UNO_A_UNO.getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 170, -1));
 
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background-213649_960_720.jpg"))); // NOI18N
+        jLabel30.setText("jLabel30");
+        UNO_A_UNO.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 420));
+
         UNO_A_VARIOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 UNO_A_VARIOSMouseClicked(evt);
@@ -499,6 +535,8 @@ public class Principal extends javax.swing.JFrame {
         });
         UNO_A_VARIOS.getContentPane().add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 170, -1));
 
+        jLabel25.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 0, 0));
         jLabel25.setText("SELECCIONE LOS CAMPOS");
         UNO_A_VARIOS.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
@@ -529,6 +567,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         UNO_A_VARIOS.getContentPane().add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, -1));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo negro relieve verde.jpg"))); // NOI18N
+        jLabel31.setText("jLabel31");
+        UNO_A_VARIOS.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 710, 390));
 
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1572,7 +1614,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
